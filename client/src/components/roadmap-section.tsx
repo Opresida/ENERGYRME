@@ -396,7 +396,7 @@ export function RoadmapSection() {
         </div>
       </div>
       
-      <style>{`
+      <style jsx>{`
         @keyframes grid-move {
           0% { transform: translate(0, 0); }
           100% { transform: translate(50px, 50px); }
