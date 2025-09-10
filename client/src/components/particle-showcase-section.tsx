@@ -59,8 +59,8 @@ export function ParticleShowcaseSection() {
                   words={liveDataWords}
                   className="w-full h-full"
                   particleColor="#22c55e"
-                  animationSpeed={0.025}
-                  particleCount={400}
+                  animationSpeed={0.03}
+                  particleCount={600}
                 />
               </div>
             </Card>

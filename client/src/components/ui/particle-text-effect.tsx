@@ -64,55 +64,69 @@ export function ParticleTextEffect({
       
       if (width === 0 || height === 0) return;
 
-      // Calcular tamanho da fonte baseado no tamanho do canvas e texto
-      const fontSize = Math.min(width / (text.length * 0.6), height * 0.3, 60);
+      // Calcular tamanho da fonte otimizado para legibilidade
+      const fontSize = Math.min(width / (text.length * 0.4), height * 0.4, 80);
       
       // Criar canvas temporário para renderizar o texto
       const tempCanvas = document.createElement('canvas');
       const tempCtx = tempCanvas.getContext('2d');
       if (!tempCtx) return;
 
-      tempCanvas.width = width;
-      tempCanvas.height = height;
+      // Usar resolução maior para melhor detecção
+      const resolution = 2;
+      tempCanvas.width = width * resolution;
+      tempCanvas.height = height * resolution;
 
-      // Configurar fonte e estilo
-      tempCtx.font = `bold ${fontSize}px Arial, sans-serif`;
+      // Configurar fonte e estilo com melhor qualidade
+      tempCtx.font = `bold ${fontSize * resolution}px Arial, sans-serif`;
       tempCtx.textAlign = 'center';
       tempCtx.textBaseline = 'middle';
       tempCtx.fillStyle = '#ffffff';
+      
+      // Melhorar qualidade do texto
+      tempCtx.textRenderingOptimization = 'optimizeQuality';
+      tempCtx.imageSmoothingEnabled = false;
 
       // Desenhar texto no canvas temporário
-      const centerX = width / 2;
-      const centerY = height / 2;
+      const centerX = (width * resolution) / 2;
+      const centerY = (height * resolution) / 2;
       tempCtx.fillText(text, centerX, centerY);
 
-      // Extrair dados de pixel
-      const imageData = tempCtx.getImageData(0, 0, width, height);
+      // Extrair dados de pixel com sampling mais denso
+      const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
       const data = imageData.data;
       const pixels: { x: number; y: number }[] = [];
 
-      // Encontrar pixels do texto (sampling mais eficiente)
-      for (let y = 0; y < height; y += 3) {
-        for (let x = 0; x < width; x += 3) {
-          const index = (y * width + x) * 4;
+      // Sampling mais denso para capturar mais detalhes do texto
+      for (let y = 0; y < tempCanvas.height; y += 2) {
+        for (let x = 0; x < tempCanvas.width; x += 2) {
+          const index = (y * tempCanvas.width + x) * 4;
           const alpha = data[index + 3];
           
-          if (alpha > 50) { // Threshold para detectar texto
-            pixels.push({ x, y });
+          if (alpha > 30) { // Threshold mais baixo para capturar mais pixels
+            pixels.push({ 
+              x: x / resolution, 
+              y: y / resolution 
+            });
           }
         }
       }
 
       console.log(`Texto: "${text}" - Pixels encontrados: ${pixels.length}`);
 
-      // Criar partículas
+      // Criar mais partículas para melhor cobertura
       const newParticles: Particle[] = [];
-      const maxParticles = Math.min(particleCount, pixels.length);
+      const maxParticles = Math.min(particleCount * 1.5, pixels.length);
 
+      // Distribuir partículas de forma mais uniforme
       for (let i = 0; i < maxParticles; i++) {
-        // Selecionar pixel aleatório
-        const pixelIndex = Math.floor(Math.random() * pixels.length);
-        const pixel = pixels[pixelIndex];
+        let pixel;
+        
+        if (pixels.length > 0) {
+          // Usar distribuição mais uniforme em vez de totalmente aleatória
+          const pixelIndex = Math.floor((i / maxParticles) * pixels.length);
+          pixel = pixels[pixelIndex] || pixels[Math.floor(Math.random() * pixels.length)];
+        }
         
         if (pixel) {
           newParticles.push({
@@ -122,7 +136,7 @@ export function ParticleTextEffect({
             targetY: pixel.y,
             char: text[Math.floor(Math.random() * text.length)],
             opacity: 0,
-            size: Math.random() * 2 + 1,
+            size: Math.random() * 1.5 + 1.5, // Partículas um pouco maiores
             color: particleColor
           });
         }
@@ -148,17 +162,20 @@ export function ParticleTextEffect({
         const dy = particle.targetY - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Velocidade adaptativa
-        const speed = animationSpeed * (1 + distance * 0.01);
+        // Velocidade adaptativa mais agressiva para convergência rápida
+        const baseSpeed = animationSpeed * 2;
+        const speed = baseSpeed * (1 + distance * 0.02);
         
         particle.x += dx * speed;
         particle.y += dy * speed;
 
-        // Calcular opacidade baseada na distância
-        if (distance < 100) {
-          particle.opacity = Math.min(1, particle.opacity + 0.03);
+        // Calcular opacidade com melhor transição
+        if (distance < 50) {
+          particle.opacity = Math.min(1, particle.opacity + 0.05);
+        } else if (distance < 150) {
+          particle.opacity = Math.min(0.8, particle.opacity + 0.02);
         } else {
-          particle.opacity = Math.max(0, 1 - distance / 200);
+          particle.opacity = Math.max(0, 0.6 - distance / 300);
         }
 
         // Desenhar partícula se visível
@@ -168,19 +185,25 @@ export function ParticleTextEffect({
           // Aplicar opacidade
           ctx.globalAlpha = particle.opacity;
           
-          // Desenhar caracter
+          // Desenhar caracter com tamanho melhor
           ctx.fillStyle = particle.color;
-          ctx.font = `${particle.size * 6}px Arial, sans-serif`;
+          ctx.font = `bold ${particle.size * 8}px Arial, sans-serif`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           
-          // Adicionar glow effect
+          // Glow effect mais intenso quando próximo do alvo
+          const glowIntensity = Math.max(0, 1 - distance / 100);
           ctx.shadowColor = particle.color;
-          ctx.shadowBlur = 8;
+          ctx.shadowBlur = 12 * glowIntensity;
           ctx.fillText(particle.char, particle.x, particle.y);
           
-          // Desenhar segundo layer para intensificar o brilho
-          ctx.shadowBlur = 4;
+          // Layer adicional para texto mais sólido
+          ctx.shadowBlur = 6 * glowIntensity;
+          ctx.fillText(particle.char, particle.x, particle.y);
+          
+          // Terceiro layer sem glow para solidez
+          ctx.shadowBlur = 0;
+          ctx.globalAlpha = particle.opacity * 0.8;
           ctx.fillText(particle.char, particle.x, particle.y);
           
           ctx.restore();
