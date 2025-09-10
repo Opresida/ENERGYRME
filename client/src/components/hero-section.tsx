@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Component as ArtificialHero } from '@/components/ui/artificial-hero';
 
