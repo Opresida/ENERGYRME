@@ -1,0 +1,112 @@
+
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#064E3B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F172A;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#10B981" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" />
+  
+  <!-- Energy Particles -->
+  <circle cx="100" cy="100" r="3" fill="#10B981" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1100" cy="150" r="2" fill="#06B6D4" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="150" cy="500" r="2.5" fill="#FBBF24" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1050" cy="520" r="2" fill="#A78BFA" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Central Energy Symbol -->
+  <g transform="translate(900, 200)">
+    <!-- Rotor symbol -->
+    <circle cx="0" cy="0" r="80" fill="none" stroke="url(#energyGradient)" stroke-width="4" opacity="0.8"/>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#10B981" stroke-width="3" opacity="0.6"/>
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#06B6D4" stroke-width="2" opacity="0.4"/>
+    
+    <!-- Energy Bolt -->
+    <path d="M-20,-40 L20,-10 L-5,-5 L15,40 L-25,10 L5,5 L-20,-40 Z" fill="url(#energyGradient)" opacity="0.9">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" 
+                        from="0" to="360" dur="4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="80" y="200" font-family="Arial, sans-serif" font-size="88" font-weight="bold" fill="url(#textGradient)">
+    RME ENERGY
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="80" y="270" font-family="Arial, sans-serif" font-size="36" fill="#E5E7EB">
+    Clean Energy Revolution
+  </text>
+  
+  <!-- Key Features -->
+  <g transform="translate(80, 320)">
+    <!-- Efficiency -->
+    <circle cx="0" cy="20" r="8" fill="#10B981"/>
+    <text x="25" y="28" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#FFFFFF">
+      98.7% Efficiency
+    </text>
+    
+    <!-- Blockchain -->
+    <circle cx="0" cy="70" r="8" fill="#06B6D4"/>
+    <text x="25" y="78" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#FFFFFF">
+      Solana Powered
+    </text>
+    
+    <!-- Global -->
+    <circle cx="0" cy="120" r="8" fill="#FBBF24"/>
+    <text x="25" y="128" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#FFFFFF">
+      Global Expansion
+    </text>
+  </g>
+  
+  <!-- CTA -->
+  <rect x="80" y="500" width="300" height="60" rx="30" fill="url(#textGradient)" opacity="0.9"/>
+  <text x="230" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Join the Revolution
+  </text>
+  
+  <!-- Token Info -->
+  <g transform="translate(450, 500)">
+    <text x="0" y="30" font-family="Arial, sans-serif" font-size="20" fill="#10B981" font-weight="600">
+      $RME Token on Solana
+    </text>
+    <text x="0" y="55" font-family="Arial, sans-serif" font-size="16" fill="#9CA3AF">
+      HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump
+    </text>
+  </g>
+  
+  <!-- Decorative Elements -->
+  <path d="M0,0 Q300,100 600,50 T1200,80" fill="none" stroke="#10B981" stroke-width="2" opacity="0.3"/>
+  <path d="M0,630 Q400,530 800,580 T1200,550" fill="none" stroke="#06B6D4" stroke-width="2" opacity="0.3"/>
+</svg>
