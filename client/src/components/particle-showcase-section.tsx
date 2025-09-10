@@ -54,13 +54,13 @@ export function ParticleShowcaseSection() {
           {/* Particle Canvas */}
           <div className="relative">
             <Card className="bg-black/40 border-green-500/20 backdrop-blur-sm overflow-hidden">
-              <div className="h-96 relative">
+              <div className="h-96 w-full relative min-h-[384px]">
                 <ParticleTextEffect
                   words={liveDataWords}
                   className="w-full h-full"
                   particleColor="#22c55e"
-                  animationSpeed={0.03}
-                  particleCount={250}
+                  animationSpeed={0.025}
+                  particleCount={400}
                 />
               </div>
             </Card>

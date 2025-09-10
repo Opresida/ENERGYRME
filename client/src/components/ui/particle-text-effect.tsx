@@ -9,6 +9,7 @@ interface Particle {
   char: string;
   opacity: number;
   size: number;
+  color: string;
 }
 
 interface ParticleTextEffectProps {
@@ -24,143 +25,225 @@ export function ParticleTextEffect({
   className = '',
   particleColor = '#22c55e',
   animationSpeed = 0.02,
-  particleCount = 200
+  particleCount = 300
 }: ParticleTextEffectProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [particles, setParticles] = useState<Particle[]>([]);
   const animationRef = useRef<number>();
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let animationId: number;
+
     // Configurar canvas
     const resizeCanvas = () => {
-      const container = canvas.parentElement;
-      if (container) {
-        canvas.width = container.clientWidth;
-        canvas.height = container.clientHeight;
-      }
+      const rect = container.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
 
     // Função para criar partículas baseadas no texto
     const createTextParticles = (text: string) => {
-      const fontSize = Math.max(24, canvas.width / text.length * 0.8);
-      ctx.font = `bold ${fontSize}px Arial`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      if (!text || text.length === 0) return;
 
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
+      const width = canvas.width;
+      const height = canvas.height;
+      
+      if (width === 0 || height === 0) return;
 
-      // Criar bitmap do texto
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = particleColor;
-      ctx.fillText(text, centerX, centerY);
+      // Calcular tamanho da fonte baseado no tamanho do canvas e texto
+      const fontSize = Math.min(width / (text.length * 0.6), height * 0.3, 60);
+      
+      // Criar canvas temporário para renderizar o texto
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      if (!tempCtx) return;
 
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const textPixels: { x: number; y: number }[] = [];
+      tempCanvas.width = width;
+      tempCanvas.height = height;
 
-      // Extrair pixels do texto
-      for (let y = 0; y < canvas.height; y += 2) {
-        for (let x = 0; x < canvas.width; x += 2) {
-          const index = (y * canvas.width + x) * 4;
-          if (imageData.data[index + 3] > 128) {
-            textPixels.push({ x, y });
+      // Configurar fonte e estilo
+      tempCtx.font = `bold ${fontSize}px Arial, sans-serif`;
+      tempCtx.textAlign = 'center';
+      tempCtx.textBaseline = 'middle';
+      tempCtx.fillStyle = '#ffffff';
+
+      // Desenhar texto no canvas temporário
+      const centerX = width / 2;
+      const centerY = height / 2;
+      tempCtx.fillText(text, centerX, centerY);
+
+      // Extrair dados de pixel
+      const imageData = tempCtx.getImageData(0, 0, width, height);
+      const data = imageData.data;
+      const pixels: { x: number; y: number }[] = [];
+
+      // Encontrar pixels do texto (sampling mais eficiente)
+      for (let y = 0; y < height; y += 3) {
+        for (let x = 0; x < width; x += 3) {
+          const index = (y * width + x) * 4;
+          const alpha = data[index + 3];
+          
+          if (alpha > 50) { // Threshold para detectar texto
+            pixels.push({ x, y });
           }
         }
       }
 
+      console.log(`Texto: "${text}" - Pixels encontrados: ${pixels.length}`);
+
       // Criar partículas
       const newParticles: Particle[] = [];
-      for (let i = 0; i < Math.min(particleCount, textPixels.length); i++) {
-        const pixel = textPixels[Math.floor(Math.random() * textPixels.length)];
-        newParticles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          targetX: pixel.x,
-          targetY: pixel.y,
-          char: text[Math.floor(Math.random() * text.length)],
-          opacity: 0,
-          size: Math.random() * 3 + 1
-        });
+      const maxParticles = Math.min(particleCount, pixels.length);
+
+      for (let i = 0; i < maxParticles; i++) {
+        // Selecionar pixel aleatório
+        const pixelIndex = Math.floor(Math.random() * pixels.length);
+        const pixel = pixels[pixelIndex];
+        
+        if (pixel) {
+          newParticles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            targetX: pixel.x,
+            targetY: pixel.y,
+            char: text[Math.floor(Math.random() * text.length)],
+            opacity: 0,
+            size: Math.random() * 2 + 1,
+            color: particleColor
+          });
+        }
       }
 
       setParticles(newParticles);
+      console.log(`Partículas criadas: ${newParticles.length}`);
     };
 
     // Função de animação
     const animate = () => {
+      if (!isAnimating.current) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach(particle => {
+      // Desenhar background semi-transparente para efeito de trilha
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((particle, index) => {
         // Mover partícula em direção ao alvo
         const dx = particle.targetX - particle.x;
         const dy = particle.targetY - particle.y;
-        
-        particle.x += dx * animationSpeed;
-        particle.y += dy * animationSpeed;
-
-        // Aumentar opacidade conforme se aproxima do alvo
         const distance = Math.sqrt(dx * dx + dy * dy);
-        particle.opacity = Math.max(0, Math.min(1, 1 - distance / 100));
 
-        // Desenhar partícula
-        ctx.save();
-        ctx.globalAlpha = particle.opacity;
-        ctx.fillStyle = particleColor;
-        ctx.font = `${particle.size * 8}px Arial`;
-        ctx.textAlign = 'center';
-        ctx.fillText(particle.char, particle.x, particle.y);
+        // Velocidade adaptativa
+        const speed = animationSpeed * (1 + distance * 0.01);
         
-        // Adicionar glow effect
-        ctx.shadowColor = particleColor;
-        ctx.shadowBlur = 10;
-        ctx.fillText(particle.char, particle.x, particle.y);
-        ctx.restore();
+        particle.x += dx * speed;
+        particle.y += dy * speed;
+
+        // Calcular opacidade baseada na distância
+        if (distance < 100) {
+          particle.opacity = Math.min(1, particle.opacity + 0.03);
+        } else {
+          particle.opacity = Math.max(0, 1 - distance / 200);
+        }
+
+        // Desenhar partícula se visível
+        if (particle.opacity > 0.01) {
+          ctx.save();
+          
+          // Aplicar opacidade
+          ctx.globalAlpha = particle.opacity;
+          
+          // Desenhar caracter
+          ctx.fillStyle = particle.color;
+          ctx.font = `${particle.size * 6}px Arial, sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          
+          // Adicionar glow effect
+          ctx.shadowColor = particle.color;
+          ctx.shadowBlur = 8;
+          ctx.fillText(particle.char, particle.x, particle.y);
+          
+          // Desenhar segundo layer para intensificar o brilho
+          ctx.shadowBlur = 4;
+          ctx.fillText(particle.char, particle.x, particle.y);
+          
+          ctx.restore();
+        }
       });
 
-      animationRef.current = requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
-    // Inicializar com primeira palavra
+    // Inicializar
     if (words.length > 0) {
+      isAnimating.current = true;
       createTextParticles(words[0]);
       animate();
     }
 
-    // Trocar palavras a cada 3 segundos
+    // Trocar palavras periodicamente
     const wordInterval = setInterval(() => {
       setCurrentWordIndex(prev => {
         const newIndex = (prev + 1) % words.length;
-        createTextParticles(words[newIndex]);
+        if (words[newIndex]) {
+          createTextParticles(words[newIndex]);
+        }
         return newIndex;
       });
-    }, 3000);
+    }, 4000);
 
+    // Resize listener
+    const resizeObserver = new ResizeObserver(() => {
+      resizeCanvas();
+      if (words[currentWordIndex]) {
+        createTextParticles(words[currentWordIndex]);
+      }
+    });
+
+    resizeObserver.observe(container);
+
+    // Cleanup
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      isAnimating.current = false;
       clearInterval(wordInterval);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
+      resizeObserver.disconnect();
+      if (animationId) {
+        cancelAnimationFrame(animationId);
       }
     };
   }, [words, particleColor, animationSpeed, particleCount]);
 
   return (
-    <div className={`relative w-full h-full ${className}`}>
+    <div ref={containerRef} className={`relative w-full h-full ${className}`}>
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: 'transparent' }}
+        style={{ 
+          background: 'transparent',
+          display: 'block'
+        }}
       />
+      
+      {/* Debug info */}
+      <div className="absolute top-4 left-4 text-xs text-green-400/60">
+        Particles: {particles.length}
+      </div>
       
       {/* Indicador da palavra atual */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
