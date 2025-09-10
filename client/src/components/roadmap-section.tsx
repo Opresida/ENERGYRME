@@ -396,6 +396,28 @@ export function RoadmapSection() {
         </div>
       </div>
       
+      <style jsx>{`
+        @keyframes grid-move {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(50px, 50px); }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+          50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+        
+        .fade-in {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,19 +1,10 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { createServer } from "http";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Create HTTP server from Express app
-const server = createServer(app);
-
-// Verificar se a HELIUS_API_KEY está configurada
-if (!process.env.HELIUS_API_KEY) {
-  console.warn('⚠️  HELIUS_API_KEY não encontrada - dados da blockchain podem ser limitados');
-}
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -46,37 +37,17 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  await registerRoutes(app); // Corrigido para chamar await aqui
+  const server = await registerRoutes(app);
 
-  // Importar e usar a rota do proxy Helius
-  app.use("/api/helius", async (req: Request, res: Response) => {
-    const heliusApiKey = process.env.HELIUS_API_KEY;
-    if (!heliusApiKey) {
-      return res.status(500).json({ message: "HELIUS_API_KEY not configured" });
-    }
+  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
 
-    const heliusUrl = `https://api.helius.xyz${req.originalUrl.replace("/api/helius", "")}`;
-    try {
-      const response = await fetch(heliusUrl, {
-        method: req.method,
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${heliusApiKey}`,
-          // Passar outros headers se necessário
-        },
-        body: req.body ? JSON.stringify(req.body) : undefined,
-      });
-
-      const data = await response.json();
-      res.status(response.status).json(data);
-    } catch (error) {
-      console.error("Error proxying Helius request:", error);
-      res.status(500).json({ message: "Internal Server Error proxying Helius" });
-    }
+    res.status(status).json({ message });
+    throw err;
   });
 
-
-  // Importantly only setup vite in development and after
+  // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
