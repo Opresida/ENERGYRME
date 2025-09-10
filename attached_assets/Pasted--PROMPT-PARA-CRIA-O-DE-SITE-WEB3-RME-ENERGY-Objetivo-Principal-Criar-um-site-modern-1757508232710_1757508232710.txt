@@ -1,0 +1,84 @@
+## **PROMPT PARA CRIAÇÃO DE SITE WEB3 - RME ENERGY**
+
+**Objetivo Principal:** Criar um site moderno, de página única (single-page landing page), para o projeto de energia limpa "RME Energy", tokenizado na blockchain Solana. O site deve ser informativo, visualmente impactante e funcional, com integração para compra do token RME através da carteira Phantom.
+
+**Tecnologias Sugeridas:**
+* **Frontend:** React.js ou Next.js para uma estrutura moderna e dinâmica.
+* **Estilização:** Tailwind CSS para um design futurista e responsivo.
+* **Web3/Solana:** Bibliotecas `@solana/wallet-adapter` para conexão de carteiras e `@solana/web3.js` para interações com a blockchain.
+
+**Estrutura do Site (Seção por Seção):**
+
+**1. Cabeçalho (Header) e Navegação:**
+* Logo da RME Energy no canto superior esquerdo.
+* Menu de navegação com as âncoras: "Roadmap", "Tecnologia", "Equipe", "Comunidade".
+* No canto superior direito, um botão principal: **"Conectar Carteira"**.
+
+**2. Seção Hero (Banner Principal):**
+* **Imagem de fundo:** `https://i.imgur.com/6NMTxce.png`
+* [cite_start]**Título Principal (H1):** "RME: Construindo o Futuro da Energia Limpa"[cite: 1].
+* [cite_start]**Subtítulo:** "Uma jornada estratégica que levará a RME da base sólida à liderança global em energia limpa, combinando inovação tecnológica, transparência e crescimento sustentável."[cite: 2, 3].
+* **Botão de Ação (CTA):** "Compre RME Agora" (deve levar à seção de compra ou link direto).
+* **Botão Secundário:** "Veja o Roadmap".
+
+**3. Seção Roadmap (Cronograma do Projeto):**
+* Use um design de linha do tempo vertical ou horizontal.
+* [cite_start]**Fase 1: Fundação (Q3 2025):** [cite: 6, 7]
+    * [cite_start]Ícones para Whitepaper v1.0, Estrutura de Governança e Auditoria de Segurança[cite: 14, 15, 18].
+    * [cite_start]Menção aos protótipos de 1KVA e 330KVA[cite: 22].
+    * Imagem de apoio: `https://i.imgur.com/j9c2xZJ.png`
+* [cite_start]**Fase 2: Validação Global (Q4 2025):** [cite: 28, 29]
+    * [cite_start]Destaque para a **COP 30** em Belém[cite: 30, 32].
+    * [cite_start]Ícones para Apresentação na COP 30, Proteção de Patentes e Lançamento do dApp de Staking[cite: 36, 38, 41].
+    * Imagem de apoio: `https://i.imgur.com/VdI2Ynm.png`
+* [cite_start]**Fase 3: Infraestrutura (Q1-Q2 2026):** [cite: 51, 52]
+    * [cite_start]Destaque: Início da construção da linha de montagem em Manaus[cite: 54, 57].
+    * [cite_start]Ícones para Lançamento do Staking dApp e Início das vendas comerciais[cite: 62, 64].
+* [cite_start]**Fase 4: Geração de Valor (Q3-Q4 2026):** [cite: 71, 72]
+    * [cite_start]Destaque: Ativação da Partilha de Receitas e Recompra/Queima de tokens[cite: 73, 74].
+    * Imagem de apoio: `https://i.imgur.com/PcYe0tg.png`
+* [cite_start]**Fase 5: Ecossistema Futuro (2027+):** [cite: 93, 94]
+    * [cite_start]Ícones para Governança da Comunidade, Expansão Internacional e P&D Aeroespacial[cite: 96, 97, 99].
+    * Imagem de apoio: `https://i.imgur.com/HlJKjI7.png`
+
+**4. Seção Tecnologia (Nosso Produto):**
+* [cite_start]**Título:** "Nossa Tecnologia: O Rotor Magnético Híbrido"[cite: 102, 103].
+* **Imagem:** `https://i.imgur.com/cYJtIB6.png`
+* [cite_start]**Texto explicativo:** "Uma inovação que combina pulso eletromagnético, repulsão magnética e inércia para criar usinas híbridas de alta eficiência."[cite: 104].
+* **Subseções:**
+    * [cite_start]**Vantagens Competitivas:** "Pelo menos o dobro da eficiência para Usinas Solares e o triplo da autonomia para Veículos Elétricos."[cite: 114, 115].
+    * [cite_start]**Status Atual:** "TRL 4-5: Protótipo validado em ambiente laboratorial."[cite: 118].
+    * [cite_start]**Importante:** "O sistema respeita a lei de conservação de energia. A fonte primária é a energia solar."[cite: 108, 109].
+
+**5. Seção Equipe (Liderança):**
+* [cite_start]**Título:** "Liderança em Negócios Internacionais e Inovação"[cite: 120].
+* **Foto:** `https://i.imgur.com/uENhjVo.jpeg` (João Matos)
+* [cite_start]**Nome:** João Matos[cite: 121].
+* [cite_start]**Cargo:** Diretor de Relações Institucionais & Co-Founder[cite: 123, 124].
+* [cite_start]**Breve Biografia:** "Com trajetória dedicada à sustentabilidade, João é a força intelectual por trás da visão da RME. Sua experiência abrange desde a pesquisa científica na Embrapa até a implementação de políticas públicas como Secretário Adjunto de Estado de Meio Ambiente do Amazonas."[cite: 121, 122, 129, 131].
+
+**6. Seção de Transparência e Token:**
+* [cite_start]**Título:** "Operação Transparência Total"[cite: 42].
+* **Imagem:** `https://i.imgur.com/95eoYXl.png`
+* **Informações do Token:**
+    * **Logo do Token:** `https://i.imgur.com/rOXPza8.png`
+    * [cite_start]**Contrato do Token (clicável para o Solscan):** `HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump`[cite: 47].
+    * **Rede:** Solana
+    * [cite_start]**Carteira de Transparência:** `Cr5uiv9AiEb77EhHYRCZAJBDk2C56dEuR8D5hoeKqXDx`[cite: 48].
+
+**7. Seção Comunidade e CTA Final:**
+* [cite_start]**Título:** "Junte-se à Revolução Energética"[cite: 148].
+* **Imagem:** `https://i.imgur.com/FQVSCFA.png`
+* [cite_start]**Botões com ícones:** "Comunidade no X (Twitter)" e "Siga no Instagram"[cite: 146, 147].
+* [cite_start]**Botão de Ação Principal:** "Compre RME na Raydium"[cite: 151].
+
+**Requisitos Funcionais (Web3):**
+1.  O botão **"Conectar Carteira"** deve usar o `@solana/wallet-adapter` para abrir um modal de seleção de carteira, com destaque para a Phantom.
+2.  Após a conexão, o botão deve exibir o endereço da carteira do usuário (formato truncado, ex: `ABCD...wxyz`).
+3.  Os botões **"Compre RME Agora"** e **"Compre RME na Raydium"** devem direcionar o usuário para a página de swap da Raydium (ou Jupiter) com o token RME já selecionado como moeda de saída. O link deve ser: `https://raydium.io/swap/?inputMint=sol&outputMint=HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump`
+
+**Estilo e Design:**
+* **Tema:** Dark (escuro), com detalhes em verde-limão vibrante, seguindo a identidade visual das imagens.
+* **Tipografia:** Moderna e limpa (Ex: Poppins, Inter, ou similar).
+* **Animações:** Sutis ao rolar a página para revelar as seções. Efeito "glow" (brilho) nos elementos verdes.
+* **Responsividade:** O site deve ser totalmente funcional e visualmente agradável em desktops, tablets e celulares.
