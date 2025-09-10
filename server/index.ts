@@ -1,10 +1,14 @@
 import express, { type Request, Response, NextFunction } from "express";
+import { createServer } from "http";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Create HTTP server from Express app
+const server = createServer(app);
 
 // Verificar se a HELIUS_API_KEY está configurada
 if (!process.env.HELIUS_API_KEY) {
