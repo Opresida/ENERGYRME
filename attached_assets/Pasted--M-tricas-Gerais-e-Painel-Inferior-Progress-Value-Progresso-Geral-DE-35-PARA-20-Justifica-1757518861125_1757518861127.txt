@@ -1,0 +1,142 @@
+📊 Métricas Gerais e Painel Inferior
+Progress Value (Progresso Geral)
+
+DE: 35%
+
+PARA: 20%
+
+Justificativa: Estamos na Fase 1 de um roadmap de 5 fases. 20% reflete com precisão nosso estágio atual, o que é mais defensável e mostra que há um longo e promissor caminho pela frente.
+
+System Metrics (Painel)
+
+Efficiency: Manter 98.7%.
+
+Justificativa: É um dado técnico da engenharia que serve como uma meta de performance do produto.
+
+Uptime: Manter 24/7.
+
+Justificativa: Reflete o objetivo de geração de energia contínua do produto.
+
+Tokens Staked:
+
+DE: 5.2M
+
+PARA: Mudar o nome da métrica para "Holders Atuais" e o valor para 70.
+
+Justificativa: O Staking ainda não está ativo, então o valor correto seria zero. Usar o número real de "Holders" (que está na blockchain) é um dado verdadeiro, transparente e que crescerá com o tempo.
+
+DAO Members:
+
+DE: 47
+
+PARA: Remover esta métrica por enquanto.
+
+Justificativa: O projeto ainda não opera como uma DAO. Podemos reintroduzir isso quando a Governança Comunitária da Fase 5 for implementada. Por enquanto, simplifica e evita confusão.
+
+📝 Dados por Fase do Roadmap
+Fase 1 - Genesis Protocol:
+
+Hash:
+
+DE: 0x7a3f...8e2d
+
+PARA: HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump
+
+Justificativa: Usar o endereço real do contrato do token na Solana é a prova máxima de transparência.
+
+Version:
+
+DE: v1.0.0-alpha
+
+PARA: Whitepaper v1.0
+
+Justificativa: Associa a fase ao marco principal de documentação que estabelece a fundação do projeto.
+
+Fase 2 - Global Validation:
+
+Patents:
+
+DE: 5 patentes, 12 países, 18M IP Value
+
+PARA: Patentes: Em Processo | Países Alvo: Global | IP Value: Confidencial
+
+Justificativa: É a informação correta e profissional. Mostra que a proteção intelectual está sendo trabalhada sem expor dados estratégicos.
+
+Status:
+
+DE: FILING
+
+PARA: Marco Principal: Apresentação na COP 30
+
+Justificativa: Substitui um status genérico pelo evento mais importante e impactante da fase.
+
+Fase 3 - Manufacturing Matrix:
+
+Production:
+
+DE: 10K Units/Year
+
+PARA: Meta de Produção: 10.000+ Unidades/Ano
+
+Justificativa: Define o número como um objetivo claro, o que é mais preciso.
+
+Revenue Goal:
+
+DE: 4.2M USD
+
+PARA: Potencial de Recompensa (Staking): US$ 6.75M/Ano
+
+Justificativa: Usa o dado da nossa simulação de vendas, que é muito mais impactante e diretamente ligado ao benefício da comunidade.
+
+Location: Manter MANAUS. (Correto e estratégico).
+
+Fase 4 - Revenue Engine:
+
+Revenue Share:
+
+DE: 25% Holders, 15% Burn, 60% Operations
+
+PARA: Alocação de Lucro: 30% Staking, 10% Burn, 60% Reinvestimento
+
+Justificativa: Reflete a tokenomics real e poderosa que definimos.
+
+Status:
+
+DE: ACTIVE
+
+PARA: Status: Ativação em Q3 2026
+
+Justificativa: Alinha o status com a data correta do nosso roadmap.
+
+Fase 5 - Ecosystem Expansion:
+
+Regions:
+
+DE: Americas, Europe, Asia-Pacific
+
+PARA: Mercados-Alvo: China, Índia, EUA, Alemanha
+
+Justificativa: Usa os dados específicos do seu documento de planejamento, mostrando um foco estratégico.
+
+🎯 Implementando as Sugestões de Novas Métricas
+Suas sugestões são ótimas. Aqui está como podemos integrá-las de forma honesta e profissional:
+
+TVL (Total Value Locked):
+
+Adicionar a métrica: TVL: US$ 0 (Staking em desenvolvimento). Mostra que o recurso está planejado.
+
+Burn Rate / Tokens Queimados:
+
+Adicionar a métrica: Tokens Queimados: 0. É um contador que começará a funcionar a partir do Q3 2026.
+
+Validator Nodes:
+
+Não aplicável. Esta métrica é para blockchains de Proof-of-Stake (como a própria Solana), e não para tokens individuais (SPL) que rodam nela. Podemos ignorá-la.
+
+Métricas de Governança:
+
+Adicionar a métrica: Propostas da Comunidade: 0 (Governança a ser lançada em 2027).
+
+Staking APY:
+
+Adicionar a métrica: Staking APY: Dinâmico (Baseado na receita de vendas). É a forma mais transparente de representar o APY, pois ele não será um valor fixo, mas sim um reflexo direto do sucesso do negócio.
