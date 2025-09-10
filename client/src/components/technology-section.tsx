@@ -9,12 +9,12 @@ export function TechnologySection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const metrics = [
-    { value: "200%", label: t.solarEfficiency, icon: <Zap className="w-6 h-6" />, color: "text-yellow-400" },
-    { value: "300%", label: t.evRange, icon: <Target className="w-6 h-6" />, color: "text-blue-400" },
-    { value: "98.7%", label: t.systemUptime, icon: <Shield className="w-6 h-6" />, color: "text-emerald-400" },
-    { value: "TRL 4-5", label: t.techReadiness, icon: <Cpu className="w-6 h-6" />, color: "text-purple-400" },
-    { value: "24/7", label: t.operation, icon: <Globe className="w-6 h-6" />, color: "text-cyan-400" },
-    { value: "100%", label: t.cleanEnergy, icon: <TrendingUp className="w-6 h-6" />, color: "text-green-400" }
+    { value: "200%", label: "Eficiência Solar", icon: <Zap className="w-6 h-6" />, color: "text-yellow-400" },
+    { value: "300%", label: "Alcance EV", icon: <Target className="w-6 h-6" />, color: "text-blue-400" },
+    { value: "98.7%", label: "Uptime Sistema", icon: <Shield className="w-6 h-6" />, color: "text-emerald-400" },
+    { value: "TRL 4-5", label: "Prontidão Tech", icon: <Cpu className="w-6 h-6" />, color: "text-purple-400" },
+    { value: "24/7", label: "Operação", icon: <Globe className="w-6 h-6" />, color: "text-cyan-400" },
+    { value: "100%", label: "Energia Limpa", icon: <TrendingUp className="w-6 h-6" />, color: "text-green-400" }
   ];
 
   useEffect(() => {
@@ -267,7 +267,7 @@ export function TechnologySection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes grid-move {
           0% { transform: translate(0, 0); }
           100% { transform: translate(50px, 50px); }

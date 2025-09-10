@@ -331,7 +331,7 @@ export function TransparencySection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes grid-move {
           0% { transform: translate(0, 0); }
           100% { transform: translate(60px, 60px); }
