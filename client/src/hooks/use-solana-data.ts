@@ -23,77 +23,115 @@ export function useSolanaData() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const TOKEN_ADDRESS = 'HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump';
+
   const fetchSolanaData = async () => {
     try {
       setIsLoading(true);
       setError(null);
       
-      // RPC endpoint da Solana mainnet
-      const response = await fetch('https://api.mainnet-beta.solana.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          jsonrpc: '2.0',
-          id: 1,
-          method: 'getTokenAccountsByOwner',
-          params: [
-            'HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump',
-            {
-              programId: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA'
-            },
-            {
-              encoding: 'jsonParsed'
-            }
-          ]
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch Solana data');
+      console.log('🔄 Buscando dados da Solscan API...');
+      
+      // 1. Buscar dados do token via Solscan API pública
+      const solscanResponse = await fetch(
+        `https://public-api.solscan.io/token/meta?tokenAddress=${TOKEN_ADDRESS}`
+      );
+      
+      if (solscanResponse.ok) {
+        const solscanData = await solscanResponse.json();
+        console.log('✅ Dados Solscan:', solscanData);
+        
+        if (solscanData) {
+          setTokenData(prev => ({
+            ...prev,
+            totalSupply: solscanData.supply || prev.totalSupply,
+            // Converter decimais se necessário
+            price: solscanData.price || prev.price
+          }));
+        }
       }
 
-      const data = await response.json();
+      // 2. Buscar holders via Solscan
+      const holdersResponse = await fetch(
+        `https://public-api.solscan.io/token/holders?tokenAddress=${TOKEN_ADDRESS}&offset=0&limit=50`
+      );
       
-      // Fallback para Jupiter API para preço e volume
+      if (holdersResponse.ok) {
+        const holdersData = await holdersResponse.json();
+        console.log('✅ Holders data:', holdersData);
+        
+        if (holdersData.data) {
+          setTokenData(prev => ({
+            ...prev,
+            holders: holdersData.total || holdersData.data.length || prev.holders
+          }));
+        }
+      }
+
+      // 3. Buscar preço via Jupiter API (mais confiável para preços)
       const jupiterResponse = await fetch(
-        `https://price.jup.ag/v4/price?ids=HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump`
+        `https://price.jup.ag/v4/price?ids=${TOKEN_ADDRESS}`
       );
       
       if (jupiterResponse.ok) {
         const priceData = await jupiterResponse.json();
-        const tokenInfo = priceData.data?.HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump;
+        console.log('✅ Jupiter price data:', priceData);
+        
+        const tokenInfo = priceData.data?.[TOKEN_ADDRESS];
         
         if (tokenInfo) {
           setTokenData(prev => ({
             ...prev,
             price: tokenInfo.price || prev.price,
             volume24h: tokenInfo.volume24h || prev.volume24h,
-            priceChange24h: tokenInfo.priceChange24h || prev.priceChange24h
+            priceChange24h: tokenInfo.priceChange24h || prev.priceChange24h,
+            marketCap: tokenInfo.price ? tokenInfo.price * prev.totalSupply : prev.marketCap
           }));
         }
       }
-      
-      // Atualizar holders se tiver dados
-      if (data.result) {
-        setTokenData(prev => ({
-          ...prev,
-          holders: data.result.length || prev.holders
-        }));
+
+      // 4. Se tiver API key da Solscan Pro, usar endpoints premium
+      const solscanApiKey = process.env.SOLSCAN_API_KEY;
+      if (solscanApiKey) {
+        console.log('🔑 Usando Solscan Pro API...');
+        
+        const proResponse = await fetch(
+          `https://pro-api.solscan.io/v2.0/token/price?address=${TOKEN_ADDRESS}`,
+          {
+            headers: {
+              'token': solscanApiKey
+            }
+          }
+        );
+        
+        if (proResponse.ok) {
+          const proData = await proResponse.json();
+          console.log('✅ Solscan Pro data:', proData);
+          
+          if (proData.data) {
+            setTokenData(prev => ({
+              ...prev,
+              price: proData.data.price || prev.price,
+              volume24h: proData.data.volume24h || prev.volume24h,
+              priceChange24h: proData.data.priceChange24h || prev.priceChange24h
+            }));
+          }
+        }
       }
       
-    } catch (err) {
-      console.error('Error fetching Solana data:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      console.log('✅ Dados atualizados com sucesso!');
       
-      // Usar dados mockados em caso de erro
+    } catch (err) {
+      console.error('❌ Erro ao buscar dados:', err);
+      setError(err instanceof Error ? err.message : 'Erro desconhecido');
+      
+      // Simular dados em caso de erro para manter a demo funcionando
       setTokenData(prev => ({
         ...prev,
-        holders: 70 + Math.floor(Math.random() * 5), // Simula variação
-        price: 0.000045 + (Math.random() - 0.5) * 0.000001,
-        volume24h: 125000 + Math.floor(Math.random() * 25000),
-        priceChange24h: 5.67 + (Math.random() - 0.5) * 2
+        holders: 70 + Math.floor(Math.random() * 10),
+        price: 0.000045 + (Math.random() - 0.5) * 0.000002,
+        volume24h: 125000 + Math.floor(Math.random() * 50000),
+        priceChange24h: 5.67 + (Math.random() - 0.5) * 3
       }));
     } finally {
       setIsLoading(false);
@@ -104,8 +142,8 @@ export function useSolanaData() {
     // Fetch inicial
     fetchSolanaData();
     
-    // Atualizar a cada 30 segundos
-    const interval = setInterval(fetchSolanaData, 30000);
+    // Atualizar a cada 60 segundos para não sobrecarregar as APIs
+    const interval = setInterval(fetchSolanaData, 60000);
     
     return () => clearInterval(interval);
   }, []);
