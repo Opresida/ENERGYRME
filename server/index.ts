@@ -6,6 +6,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Verificar se a HELIUS_API_KEY está configurada
+if (!process.env.HELIUS_API_KEY) {
+  console.warn('⚠️  HELIUS_API_KEY não encontrada - dados da blockchain podem ser limitados');
+}
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -37,17 +42,37 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  const server = await registerRoutes(app);
+  await registerRoutes(app); // Corrigido para chamar await aqui
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+  // Importar e usar a rota do proxy Helius
+  app.use("/api/helius", async (req: Request, res: Response) => {
+    const heliusApiKey = process.env.HELIUS_API_KEY;
+    if (!heliusApiKey) {
+      return res.status(500).json({ message: "HELIUS_API_KEY not configured" });
+    }
 
-    res.status(status).json({ message });
-    throw err;
+    const heliusUrl = `https://api.helius.xyz${req.originalUrl.replace("/api/helius", "")}`;
+    try {
+      const response = await fetch(heliusUrl, {
+        method: req.method,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${heliusApiKey}`,
+          // Passar outros headers se necessário
+        },
+        body: req.body ? JSON.stringify(req.body) : undefined,
+      });
+
+      const data = await response.json();
+      res.status(response.status).json(data);
+    } catch (error) {
+      console.error("Error proxying Helius request:", error);
+      res.status(500).json({ message: "Internal Server Error proxying Helius" });
+    }
   });
 
-  // importantly only setup vite in development and after
+
+  // Importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
