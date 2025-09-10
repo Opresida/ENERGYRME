@@ -3,6 +3,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom animations for Energy Loader */
+@keyframes grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+@keyframes float-particle {
+  0%, 100% { 
+    transform: translateY(0px) scale(0.8); 
+    opacity: 0.4; 
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.2); 
+    opacity: 1; 
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Utility classes for animations */
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-grid-move {
+  animation: grid-move 20s linear infinite;
+}
+
+.animate-float-particle {
+  animation: float-particle 3s ease-in-out infinite;
+}
+
 :root {
   --background: hsl(0 0% 4%);
   --foreground: hsl(0 0% 98%);
