@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { useWalletConnection } from './wallet-provider';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { LanguageSelector } from '@/components/ui/language-selector';
+import { useI18n } from '@/hooks/use-i18n';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { connected, connecting, publicKey, handleConnect, formatAddress } = useWalletConnection();
+  const { t } = useI18n();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -14,6 +17,13 @@ export function Header() {
     }
     setIsMobileMenuOpen(false);
   };
+
+  const navItems = [
+    { name: t.roadmap, href: '#roadmap' },
+    { name: t.technology, href: '#technology' },
+    { name: t.team, href: '#team' },
+    { name: t.community, href: '#community' }
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -25,53 +35,38 @@ export function Header() {
           </div>
           <span className="text-xl font-bold text-primary">RME Energy</span>
         </div>
-        
-        {/* Desktop Navigation */}
+
+        {/* Desktop Navigation & Connect Wallet Button */}
         <div className="hidden md:flex items-center space-x-8">
-          <button 
-            onClick={() => scrollToSection('roadmap')}
-            className="text-muted-foreground hover:text-primary transition-colors"
-            data-testid="nav-roadmap"
-          >
-            Roadmap
-          </button>
-          <button 
-            onClick={() => scrollToSection('tecnologia')}
-            className="text-muted-foreground hover:text-primary transition-colors"
-            data-testid="nav-tecnologia"
-          >
-            Tecnologia
-          </button>
-          <button 
-            onClick={() => scrollToSection('equipe')}
-            className="text-muted-foreground hover:text-primary transition-colors"
-            data-testid="nav-equipe"
-          >
-            Equipe
-          </button>
-          <button 
-            onClick={() => scrollToSection('comunidade')}
-            className="text-muted-foreground hover:text-primary transition-colors"
-            data-testid="nav-comunidade"
-          >
-            Comunidade
-          </button>
+          <nav className="hidden md:flex space-x-8">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => scrollToSection(item.href.substring(1))}
+                className="text-muted-foreground hover:text-primary transition-colors"
+                data-testid={`nav-${item.href.substring(1)}`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </nav>
+
+          {/* Language Selector & Connect Wallet */}
+          <div className="hidden md:flex items-center gap-4">
+            <LanguageSelector />
+            <Button
+              onClick={handleConnect}
+              disabled={connecting}
+              className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all glow-green"
+              data-testid="wallet-connect-button"
+            >
+              {connecting ? 'Conectando...' : connected ? (publicKey ? formatAddress(publicKey) : 'Desconectar') : t.connectWallet}
+            </Button>
+          </div>
         </div>
-        
-        {/* Connect Wallet Button */}
-        <div className="hidden md:block">
-          <Button 
-            onClick={handleConnect}
-            disabled={connecting}
-            className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all glow-green"
-            data-testid="wallet-connect-button"
-          >
-            {connecting ? 'Conectando...' : connected ? (publicKey ? formatAddress(publicKey) : 'Desconectar') : 'Conectar Carteira'}
-          </Button>
-        </div>
-        
+
         {/* Mobile Menu Button */}
-        <button 
+        <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden p-2"
           data-testid="mobile-menu-button"
@@ -83,47 +78,30 @@ export function Header() {
           )}
         </button>
       </nav>
-      
+
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-card border-b border-border">
           <div className="px-4 py-4 space-y-4">
-            <button 
-              onClick={() => scrollToSection('roadmap')}
-              className="block text-muted-foreground hover:text-primary transition-colors w-full text-left"
-              data-testid="mobile-nav-roadmap"
-            >
-              Roadmap
-            </button>
-            <button 
-              onClick={() => scrollToSection('tecnologia')}
-              className="block text-muted-foreground hover:text-primary transition-colors w-full text-left"
-              data-testid="mobile-nav-tecnologia"
-            >
-              Tecnologia
-            </button>
-            <button 
-              onClick={() => scrollToSection('equipe')}
-              className="block text-muted-foreground hover:text-primary transition-colors w-full text-left"
-              data-testid="mobile-nav-equipe"
-            >
-              Equipe
-            </button>
-            <button 
-              onClick={() => scrollToSection('comunidade')}
-              className="block text-muted-foreground hover:text-primary transition-colors w-full text-left"
-              data-testid="mobile-nav-comunidade"
-            >
-              Comunidade
-            </button>
-            <div className="pt-2">
-              <Button 
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => scrollToSection(item.href.substring(1))}
+                className="block text-muted-foreground hover:text-primary transition-colors w-full text-left"
+                data-testid={`mobile-nav-${item.href.substring(1)}`}
+              >
+                {item.name}
+              </button>
+            ))}
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+              <LanguageSelector />
+              <Button
                 onClick={handleConnect}
                 disabled={connecting}
-                className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all glow-green w-full"
+                className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all glow-green"
                 data-testid="mobile-wallet-connect-button"
               >
-                {connecting ? 'Conectando...' : connected ? (publicKey ? formatAddress(publicKey) : 'Desconectar') : 'Conectar Carteira'}
+                {connecting ? 'Conectando...' : connected ? (publicKey ? formatAddress(publicKey) : 'Desconectar') : t.connectWallet}
               </Button>
             </div>
           </div>

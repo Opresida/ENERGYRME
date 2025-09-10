@@ -1,19 +1,20 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Zap, Shield, Cpu, Target, Globe, TrendingUp, ChevronRight, Play } from 'lucide-react';
+import { useI18n } from '@/hooks/use-i18n';
 
 export function TechnologySection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeMetric, setActiveMetric] = useState(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const metrics = [
-    { value: "200%", label: "Solar Efficiency", icon: <Zap className="w-6 h-6" />, color: "text-yellow-400" },
-    { value: "300%", label: "EV Range", icon: <Target className="w-6 h-6" />, color: "text-blue-400" },
-    { value: "98.7%", label: "System Uptime", icon: <Shield className="w-6 h-6" />, color: "text-emerald-400" },
-    { value: "TRL 4-5", label: "Tech Readiness", icon: <Cpu className="w-6 h-6" />, color: "text-purple-400" },
-    { value: "24/7", label: "Operation", icon: <Globe className="w-6 h-6" />, color: "text-cyan-400" },
-    { value: "100%", label: "Clean Energy", icon: <TrendingUp className="w-6 h-6" />, color: "text-green-400" }
+    { value: "200%", label: t.solarEfficiency, icon: <Zap className="w-6 h-6" />, color: "text-yellow-400" },
+    { value: "300%", label: t.evRange, icon: <Target className="w-6 h-6" />, color: "text-blue-400" },
+    { value: "98.7%", label: t.systemUptime, icon: <Shield className="w-6 h-6" />, color: "text-emerald-400" },
+    { value: "TRL 4-5", label: t.techReadiness, icon: <Cpu className="w-6 h-6" />, color: "text-purple-400" },
+    { value: "24/7", label: t.operation, icon: <Globe className="w-6 h-6" />, color: "text-cyan-400" },
+    { value: "100%", label: t.cleanEnergy, icon: <TrendingUp className="w-6 h-6" />, color: "text-green-400" }
   ];
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export function TechnologySection() {
             animation: 'grid-move 20s linear infinite'
           }}
         ></div>
-        
+
         {/* Floating Particles */}
         {[...Array(20)].map((_, i) => (
           <div
@@ -101,7 +102,7 @@ export function TechnologySection() {
               <div className="w-3 h-3 bg-emerald-400 rounded-full mr-3 animate-pulse"></div>
               <h3 className="text-2xl font-semibold text-white">Sistema de Métricas em Tempo Real</h3>
             </div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {metrics.map((metric, index) => (
                 <div
@@ -126,7 +127,7 @@ export function TechnologySection() {
                     </div>
                     <div className="text-gray-400 text-sm mt-1">{metric.label}</div>
                   </div>
-                  
+
                   {activeMetric === index && (
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 animate-pulse"></div>
                   )}
@@ -147,16 +148,16 @@ export function TechnologySection() {
                   alt="Rotor Magnético Híbrido - Visualização 3D"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Holographic Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-transparent to-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 {/* Energy Flow Animation */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <div className="w-32 h-32 border-2 border-emerald-400/50 rounded-full animate-ping"></div>
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 border-2 border-cyan-400/50 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
                 </div>
-                
+
                 {/* Play Button for 3D Demo */}
                 <div className="absolute bottom-4 right-4">
                   <button className="bg-emerald-400/20 hover:bg-emerald-400/30 border border-emerald-400/50 rounded-full p-3 transition-all duration-300 group-hover:scale-110">
@@ -164,7 +165,7 @@ export function TechnologySection() {
                   </button>
                 </div>
               </div>
-              
+
               <div className="mt-6">
                 <h4 className="text-xl font-semibold text-white mb-2">Visualização Interativa 3D</h4>
                 <p className="text-gray-400 text-sm">Explore o rotor magnético em detalhes com nossa simulação interativa</p>
@@ -215,7 +216,7 @@ export function TechnologySection() {
                       {card.title}
                     </h3>
                     <p className="text-gray-300 mb-4">{card.description}</p>
-                    
+
                     <div className="space-y-2">
                       {card.metrics.map((metric, metricIndex) => (
                         <div key={metricIndex} className="flex items-center text-sm">
@@ -226,7 +227,7 @@ export function TechnologySection() {
                     </div>
                   </div>
                 </div>
-                
+
                 {hoveredCard === index && (
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-400/10 to-cyan-400/10 animate-pulse"></div>
                 )}
@@ -243,20 +244,20 @@ export function TechnologySection() {
               Nossa tecnologia respeita rigorosamente as leis da física, utilizando energia solar como fonte primária
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-black/40 rounded-xl border border-emerald-400/30 p-6 text-center">
               <Shield className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
               <h4 className="text-lg font-semibold text-white mb-2">Lei de Conservação</h4>
               <p className="text-gray-400 text-sm">Energia total do sistema sempre conservada</p>
             </div>
-            
+
             <div className="bg-black/40 rounded-xl border border-cyan-400/30 p-6 text-center">
               <Cpu className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
               <h4 className="text-lg font-semibold text-white mb-2">TRL 4-5</h4>
               <p className="text-gray-400 text-sm">Protótipo validado em ambiente laboratorial</p>
             </div>
-            
+
             <div className="bg-black/40 rounded-xl border border-purple-400/30 p-6 text-center">
               <Globe className="w-12 h-12 text-purple-400 mx-auto mb-4" />
               <h4 className="text-lg font-semibold text-white mb-2">Fonte Solar</h4>
@@ -271,18 +272,18 @@ export function TechnologySection() {
           0% { transform: translate(0, 0); }
           100% { transform: translate(50px, 50px); }
         }
-        
+
         @keyframes float {
           0%, 100% { transform: translateY(0) rotate(0deg); }
           50% { transform: translateY(-20px) rotate(180deg); }
         }
-        
+
         .fade-in {
           opacity: 0;
           transform: translateY(30px);
           transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .fade-in.visible {
           opacity: 1;
           transform: translateY(0);

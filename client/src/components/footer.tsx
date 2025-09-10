@@ -1,8 +1,9 @@
-
 import React from 'react';
 import { Zap, Twitter, Github, MessageCircle, Mail, Globe, ArrowUp } from 'lucide-react';
+import { useI18n } from '@/hooks/use-i18n';
 
 export function Footer() {
+  const { t } = useI18n();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -29,7 +30,7 @@ export function Footer() {
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-cyan-400/20 to-blue-500/20 rounded-xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
               </div>
-              
+
               <div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent" data-testid="footer-logo">
                   RME Energy
@@ -40,8 +41,8 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="text-gray-300 mb-6 text-lg leading-relaxed max-w-md" data-testid="footer-tagline">
-              Revolucionando o futuro da energia limpa através de tecnologia blockchain e inovação sustentável.
+            <p className="text-gray-400 text-lg leading-relaxed max-w-md" data-testid="footer-tagline">
+              {t.footerDescription}
             </p>
 
             {/* Tech Stats */}
@@ -59,50 +60,52 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-emerald-400 font-semibold text-lg mb-4 flex items-center">
-              <div className="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse"></div>
-              Navegação
-            </h3>
-            <ul className="space-y-3">
-              {['Roadmap', 'Tecnologia', 'Equipe', 'Transparência', 'Comunidade'].map((item, index) => (
-                <li key={index}>
-                  <a 
-                    href={`#${item.toLowerCase()}`}
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-white mb-4 relative">
+                {t.quickLinks}
+                <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+              </h3>
+              <div className="space-y-3">
+                {[t.roadmap, t.technology, t.team, t.transparency, t.community, t.faq].map((link) => (
+                  <a
+                    key={link}
+                    href={`#${link.toLowerCase()}`}
                     className="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center group"
                   >
                     <div className="w-1 h-1 bg-gray-600 rounded-full mr-3 group-hover:bg-emerald-400 transition-colors duration-300"></div>
-                    {item}
+                    {link}
                   </a>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Connect & Social */}
           <div>
-            <h3 className="text-cyan-400 font-semibold text-lg mb-4 flex items-center">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
-              Conecte-se
-            </h3>
-            
-            <div className="space-y-4 mb-6">
-              {[
-                { icon: Twitter, label: 'Twitter', href: '#' },
-                { icon: Github, label: 'GitHub', href: '#' },
-                { icon: MessageCircle, label: 'Discord', href: '#' },
-                { icon: Mail, label: 'Email', href: 'mailto:contact@rmeenergy.com' }
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="flex items-center text-gray-400 hover:text-cyan-400 transition-all duration-300 group"
-                >
-                  <div className="w-8 h-8 bg-gray-800/50 rounded-lg flex items-center justify-center mr-3 group-hover:bg-cyan-400/20 group-hover:scale-110 transition-all duration-300">
-                    <social.icon className="w-4 h-4" />
-                  </div>
-                  {social.label}
-                </a>
-              ))}
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-white mb-4 relative">
+                {t.social}
+                <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+              </h3>
+              <div className="space-y-4 mb-6">
+                {[
+                  { icon: Twitter, label: 'Twitter', href: '#' },
+                  { icon: Github, label: 'GitHub', href: '#' },
+                  { icon: MessageCircle, label: 'Discord', href: '#' },
+                  { icon: Mail, label: 'Email', href: 'mailto:contact@rmeenergy.com' }
+                ].map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className="flex items-center text-gray-400 hover:text-cyan-400 transition-all duration-300 group"
+                  >
+                    <div className="w-8 h-8 bg-gray-800/50 rounded-lg flex items-center justify-center mr-3 group-hover:bg-cyan-400/20 group-hover:scale-110 transition-all duration-300">
+                      <social.icon className="w-4 h-4" />
+                    </div>
+                    {social.label}
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* Powered by Solana Badge */}
@@ -111,6 +114,16 @@ export function Footer() {
                 <Globe className="w-4 h-4 text-purple-400" />
                 <span className="text-sm text-purple-400 font-mono">Powered by Solana</span>
               </div>
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-white mb-4 relative">
+                {t.contact}
+                <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+              </h3>
             </div>
           </div>
         </div>
@@ -123,10 +136,8 @@ export function Footer() {
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-8 mb-4 md:mb-0">
-            <p className="text-sm text-gray-500 font-mono" data-testid="footer-copyright">
-              © 2024 RME Energy. Todos os direitos reservados.
-            </p>
+          <div className="text-center text-gray-500 flex flex-col md:flex-row items-center justify-center gap-2">
+            <span>© 2024 RME Energy. {t.allRightsReserved}</span>
             <div className="flex items-center space-x-6 text-xs text-gray-600">
               <a href="#" className="hover:text-emerald-400 transition-colors">Política de Privacidade</a>
               <a href="#" className="hover:text-emerald-400 transition-colors">Termos de Uso</a>
