@@ -345,10 +345,10 @@ export const Component = () => {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: '100%', background: '#000' }}>
+    <div ref={containerRef} style={{ width: '100%', height: '100vh', background: '#000', position: 'relative' }}>
       {/* Navigation*/}
       <nav style={{
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
@@ -411,7 +411,7 @@ export const Component = () => {
 
       {/* Large text*/}
       <div style={{
-        position: 'fixed',
+        position: 'absolute',
         bottom: '15%',
         left: 0,
         right: 0,
@@ -438,7 +438,7 @@ export const Component = () => {
 
       {/* Left side text */}
       <div style={{
-        position: 'fixed',
+        position: 'absolute',
         left: '2rem',
         top: '40%',
         zIndex: 50,
@@ -465,7 +465,7 @@ export const Component = () => {
 
       {/* Right side text */}
       <div style={{
-        position: 'fixed',
+        position: 'absolute',
         right: '2rem',
         top: '40%',
         zIndex: 50,
@@ -492,7 +492,7 @@ export const Component = () => {
 
       {/* Bottom text*/}
       <div style={{
-        position: 'fixed',
+        position: 'absolute',
         bottom: '8%',
         left: '2rem',
         zIndex: 50,
@@ -513,7 +513,7 @@ export const Component = () => {
       </div>
 
       {/* Canvas Container */}
-      <div style={{ position: 'sticky', top: 0, width: '100%', height: '100vh' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100vh' }}>
         <canvas
           ref={canvasRef}
           style={{
