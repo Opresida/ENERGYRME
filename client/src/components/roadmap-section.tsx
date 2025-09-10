@@ -54,13 +54,6 @@ export function RoadmapSection() {
               </li>
             </ul>
           </div>
-          <div className="rounded-lg overflow-hidden">
-            <img 
-              src="https://i.imgur.com/j9c2xZJ.png" 
-              alt="Fase 1 - Fundação"
-              className="w-full h-48 object-cover"
-            />
-          </div>
         </div>
       ),
     },
@@ -93,13 +86,6 @@ export function RoadmapSection() {
                 Lançamento do dApp de Staking
               </li>
             </ul>
-          </div>
-          <div className="rounded-lg overflow-hidden">
-            <img 
-              src="https://i.imgur.com/VdI2Ynm.png" 
-              alt="Fase 2 - Validação Global"
-              className="w-full h-48 object-cover"
-            />
           </div>
         </div>
       ),
@@ -167,13 +153,6 @@ export function RoadmapSection() {
               </li>
             </ul>
           </div>
-          <div className="rounded-lg overflow-hidden">
-            <img 
-              src="https://i.imgur.com/PcYe0tg.png" 
-              alt="Fase 4 - Geração de Valor"
-              className="w-full h-48 object-cover"
-            />
-          </div>
         </div>
       ),
     },
@@ -201,13 +180,6 @@ export function RoadmapSection() {
                 P&D Aeroespacial
               </li>
             </ul>
-          </div>
-          <div className="rounded-lg overflow-hidden">
-            <img 
-              src="https://i.imgur.com/HlJKjI7.png" 
-              alt="Fase 5 - Ecossistema Futuro"
-              className="w-full h-48 object-cover"
-            />
           </div>
         </div>
       ),
