@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,24 +13,14 @@ export const Component = () => {
   const scrollProgressRef = useRef(0);
   const timeRef = useRef(0);
 
-  // Placeholder for token data, in a real app this would come from an API or state management
-  const tokenData = {
-    holders: 79,
-    price: 0.000049,
-    volume24h: 100000
-  };
-
-  // Placeholder for dynamic text, could be managed by state or props
-  const currentText = "Future of Energy";
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const grainCanvas = grainCanvasRef.current;
     const ctx = canvas.getContext('2d');
     const grainCtx = grainCanvas.getContext('2d');
-
+    
     const density = ' .:-=+*#%@';
-
+    
     const params = {
       rotation: 0,
       atmosphereShift: 0,
@@ -43,7 +34,7 @@ export const Component = () => {
       repeat: -1,
       ease: "none"
     });
-
+    
     gsap.to(params, {
       atmosphereShift: 1,
       duration: 6,
@@ -84,7 +75,7 @@ export const Component = () => {
     const generateFilmGrain = (width, height, intensity = 0.15) => {
       const imageData = grainCtx.createImageData(width, height);
       const data = imageData.data;
-
+      
       for (let i = 0; i < data.length; i += 4) {
         const grain = (Math.random() - 0.5) * intensity * 255;
         data[i] = Math.max(0, Math.min(255, 128 + grain));
@@ -92,7 +83,7 @@ export const Component = () => {
         data[i + 2] = Math.max(0, Math.min(255, 128 + grain));
         data[i + 3] = Math.abs(grain) * 3;
       }
-
+      
       return imageData;
     };
 
@@ -100,58 +91,58 @@ export const Component = () => {
     const drawGlitchedOrb = (centerX, centerY, radius, hue, time, glitchIntensity) => {
       // Save the current state
       ctx.save();
-
+      
       // Random glitch triggers
       const shouldGlitch = Math.random() < 0.1 && glitchIntensity > 0.5;
       const glitchOffset = shouldGlitch ? (Math.random() - 0.5) * 20 * glitchIntensity : 0;
       const glitchScale = shouldGlitch ? 1 + (Math.random() - 0.5) * 0.3 * glitchIntensity : 1;
-
+      
       // Apply glitch transformations
       if (shouldGlitch) {
         ctx.translate(glitchOffset, glitchOffset * 0.8);
         ctx.scale(glitchScale, 1 / glitchScale);
       }
-
+      
       // Main orb gradient
       const orbGradient = ctx.createRadialGradient(
         centerX, centerY, 0,
         centerX, centerY, radius * 1.5
       );
-
+      
       orbGradient.addColorStop(0, `hsla(${hue + 10}, 100%, 95%, 0.9)`);
       orbGradient.addColorStop(0.2, `hsla(${hue + 20}, 90%, 80%, 0.7)`);
       orbGradient.addColorStop(0.5, `hsla(${hue}, 70%, 50%, 0.4)`);
       orbGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
+      
       ctx.fillStyle = orbGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+      
       // Bright center circle with glitch
       const centerRadius = radius * 0.3;
       ctx.fillStyle = `hsla(${hue + 20}, 100%, 95%, 0.8)`;
       ctx.beginPath();
       ctx.arc(centerX, centerY, centerRadius, 0, Math.PI * 2);
       ctx.fill();
-
+      
       // Glitch effects on the orb
       if (shouldGlitch) {
         // RGB separation effect
         ctx.globalCompositeOperation = 'screen';
-
+        
         // Red channel offset
         ctx.fillStyle = `hsla(100, 100%, 50%, ${0.6 * glitchIntensity})`;
         ctx.beginPath();
         ctx.arc(centerX + glitchOffset * 0.5, centerY, centerRadius, 0, Math.PI * 2);
         ctx.fill();
-
+        
         // Blue channel offset
         ctx.fillStyle = `hsla(240, 100%, 50%, ${0.5 * glitchIntensity})`;
         ctx.beginPath();
         ctx.arc(centerX - glitchOffset * 0.5, centerY, centerRadius, 0, Math.PI * 2);
         ctx.fill();
-
+        
         ctx.globalCompositeOperation = 'source-over';
-
+        
         // Digital noise lines
         ctx.strokeStyle = `rgba(255, 255, 255, ${0.6 * glitchIntensity})`;
         ctx.lineWidth = 1;
@@ -159,13 +150,13 @@ export const Component = () => {
           const y = centerY - radius + (Math.random() * radius * 2);
           const startX = centerX - radius + Math.random() * 20;
           const endX = centerX + radius - Math.random() * 20;
-
+          
           ctx.beginPath();
           ctx.moveTo(startX, y);
           ctx.lineTo(endX, y);
           ctx.stroke();
         }
-
+        
         // Pixelated corruption blocks
         ctx.fillStyle = `rgba(255, 0, 255, ${0.4 * glitchIntensity})`;
         for (let i = 0; i < 3; i++) {
@@ -175,11 +166,11 @@ export const Component = () => {
           ctx.fillRect(blockX, blockY, blockSize, blockSize);
         }
       }
-
+      
       // Outer ring with glitch distortion
       ctx.strokeStyle = `hsla(${hue + 20}, 80%, 70%, 0.6)`;
       ctx.lineWidth = 2;
-
+      
       if (shouldGlitch) {
         // Distorted ring segments
         const segments = 8;
@@ -187,7 +178,7 @@ export const Component = () => {
           const startAngle = (i / segments) * Math.PI * 2;
           const endAngle = ((i + 1) / segments) * Math.PI * 2;
           const ringRadius = radius * 1.2 + (Math.random() - 0.5) * 10 * glitchIntensity;
-
+          
           ctx.beginPath();
           ctx.arc(centerX, centerY, ringRadius, startAngle, endAngle);
           ctx.stroke();
@@ -198,22 +189,22 @@ export const Component = () => {
         ctx.arc(centerX, centerY, radius * 1.2, 0, Math.PI * 2);
         ctx.stroke();
       }
-
+      
       // Data corruption effect
       if (shouldGlitch && Math.random() < 0.3) {
         ctx.globalCompositeOperation = 'difference';
         ctx.fillStyle = `rgba(255, 255, 255, ${0.8 * glitchIntensity})`;
-
+        
         // Horizontal glitch bars
         for (let i = 0; i < 3; i++) {
           const barY = centerY - radius + Math.random() * radius * 2;
           const barHeight = Math.random() * 5 + 1;
           ctx.fillRect(centerX - radius, barY, radius * 2, barHeight);
         }
-
+        
         ctx.globalCompositeOperation = 'source-over';
       }
-
+      
       // Restore the context
       ctx.restore();
     };
@@ -221,69 +212,69 @@ export const Component = () => {
     function render() {
       timeRef.current += 0.016;
       const time = timeRef.current;
-
+      
       const width = canvas.width = grainCanvas.width = window.innerWidth;
       const height = canvas.height = grainCanvas.height = window.innerHeight;
-
+      
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, width, height);
-
+      
       const centerX = width / 2;
       const centerY = height / 2;
       const radius = Math.min(width, height) * 0.2;
-
+      
       // Atmospheric background
       const bgGradient = ctx.createRadialGradient(
         centerX, centerY - 50, 0,
         centerX, centerY, Math.max(width, height) * 0.8
       );
-
+      
       const hue = 180 + params.atmosphereShift * 60;
       bgGradient.addColorStop(0, `hsla(${hue + 40}, 80%, 60%, 0.4)`);
       bgGradient.addColorStop(0.3, `hsla(${hue}, 60%, 40%, 0.3)`);
       bgGradient.addColorStop(0.6, `hsla(${hue - 20}, 40%, 20%, 0.2)`);
       bgGradient.addColorStop(1, 'rgba(0, 0, 0, 0.9)');
-
+      
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, width, height);
-
+      
       // Draw glitched orb
       drawGlitchedOrb(centerX, centerY, radius, hue, time, params.glitchIntensity);
-
+      
       // ASCII sphere particles
       ctx.font = '10px "JetBrains Mono", monospace';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-
+      
       const spacing = 9;
       const cols = Math.floor(width / spacing);
       const rows = Math.floor(height / spacing);
-
+      
       for (let i = 0; i < cols && i < 150; i++) {
         for (let j = 0; j < rows && j < 100; j++) {
           const x = (i - cols / 2) * spacing + centerX;
           const y = (j - rows / 2) * spacing + centerY;
-
+          
           const dx = x - centerX;
           const dy = y - centerY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-
+          
           if (dist < radius && Math.random() > 0.4) {
             const z = Math.sqrt(Math.max(0, radius * radius - dx * dx - dy * dy));
             const angle = params.rotation;
             const rotZ = dx * Math.sin(angle) + z * Math.cos(angle);
             const brightness = (rotZ + radius) / (radius * 2);
-
+            
             if (rotZ > -radius * 0.3) {
               const charIndex = Math.floor(brightness * (density.length - 1));
               let char = density[charIndex];
-
+              
               // Glitch the ASCII characters near the orb
               if (dist < radius * 0.8 && params.glitchIntensity > 0.8 && Math.random() < 0.3) {
                 const glitchChars = ['█', '▓', '▒', '░', '▄', '▀', '■', '□'];
                 char = glitchChars[Math.floor(Math.random() * glitchChars.length)];
               }
-
+              
               const alpha = Math.max(0.2, brightness);
               ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
               ctx.fillText(char, x, y);
@@ -291,13 +282,13 @@ export const Component = () => {
           }
         }
       }
-
+      
       // Generate and render film grain
       grainCtx.clearRect(0, 0, width, height);
       const grainIntensity = 0.22 + Math.sin(time * 10) * 0.03;
       const grainImageData = generateFilmGrain(width, height, grainIntensity);
       grainCtx.putImageData(grainImageData, 0, 0);
-
+      
       // Enhanced grain during glitch
       if (params.glitchIntensity > 0.5) {
         grainCtx.globalCompositeOperation = 'screen';
@@ -306,40 +297,40 @@ export const Component = () => {
           const y = Math.random() * height;
           const size = Math.random() * 3 + 0.5;
           const opacity = Math.random() * 0.5 * params.glitchIntensity;
-
+          
           grainCtx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
           grainCtx.beginPath();
-          ctx.arc(x, y, size, 0, Math.PI * 2);
-          ctx.fill();
+          grainCtx.arc(x, y, size, 0, Math.PI * 2);
+          grainCtx.fill();
         }
       }
-
+      
       grainCtx.globalCompositeOperation = 'screen';
       for (let i = 0; i < 100; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
         const size = Math.random() * 2 + 0.5;
         const opacity = Math.random() * 0.3;
-
+        
         grainCtx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
         grainCtx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
+        grainCtx.arc(x, y, size, 0, Math.PI * 2);
+        grainCtx.fill();
       }
-
+      
       grainCtx.globalCompositeOperation = 'multiply';
       for (let i = 0; i < 50; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
         const size = Math.random() * 1.5 + 0.5;
         const opacity = Math.random() * 0.5 + 0.5;
-
+        
         grainCtx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
         grainCtx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
+        grainCtx.arc(x, y, size, 0, Math.PI * 2);
+        grainCtx.fill();
       }
-
+      
       frameRef.current = requestAnimationFrame(render);
     }
 
@@ -384,7 +375,7 @@ export const Component = () => {
             background: '#000'
           }} />
         </div>
-
+        
         <div style={{
           display: 'flex',
           gap: '2rem',
@@ -404,7 +395,7 @@ export const Component = () => {
             Equipe
           </a>
         </div>
-
+        
         <div style={{
           fontFamily: 'Arial, sans-serif',
           fontSize: '11px',
@@ -499,105 +490,6 @@ export const Component = () => {
         </div>
       </div>
 
-      {/* Center content */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 50,
-        textAlign: 'center',
-        opacity: Math.max(0, 1 - scrollProgressRef.current * 1.5),
-        transition: 'opacity 0.1s ease-out'
-      }}>
-        {/* Main Title */}
-        <div style={{
-          fontSize: '4rem',
-          fontWeight: 'bold',
-          background: 'linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6)',
-          backgroundClip: 'text',
-          WebkitBackgroundClip: 'text',
-          color: 'transparent',
-          textShadow: '0 0 20px rgba(16, 185, 129, 0.5)',
-          marginBottom: '1rem',
-          letterSpacing: '4px',
-          fontFamily: 'Arial, sans-serif'
-        }}>
-          RME ENERGY
-        </div>
-
-        {/* Subtitle */}
-        <div style={{
-          fontSize: '1.2rem',
-          color: '#e5e7eb',
-          marginBottom: '2rem',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          opacity: 0.9
-        }}>
-          Clean Energy Revolution
-        </div>
-
-        {currentText && (
-          <div style={{
-            fontSize: '2.5rem',
-            fontWeight: 'bold',
-            color: 'white',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
-            marginBottom: '1rem',
-            letterSpacing: '3px'
-          }}>
-            {currentText}
-          </div>
-        )}
-
-        {/* Action Button */}
-        <div style={{ marginBottom: '2rem' }}>
-          <button style={{
-            background: 'linear-gradient(90deg, #10b981, #3b82f6)',
-            border: 'none',
-            padding: '12px 30px',
-            borderRadius: '50px',
-            color: 'white',
-            fontSize: '1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)',
-            transition: 'all 0.3s ease'
-          }}>
-            Explore Technology
-          </button>
-        </div>
-
-        {/* Token info */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          width: '400px',
-          marginTop: '2rem',
-          fontSize: '0.9rem',
-          color: '#d1d5db'
-        }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ color: '#10b981', fontWeight: 'bold' }}>
-              {tokenData?.holders || '79'} HOLDERS
-            </div>
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ color: '#3b82f6', fontWeight: 'bold' }}>
-              ${tokenData?.price?.toFixed(6) || '0.000049'}
-            </div>
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ color: '#8b5cf6', fontWeight: 'bold' }}>
-              VOL ${(tokenData?.volume24h || 100000).toLocaleString()}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Bottom text*/}
       <div style={{
         position: 'absolute',
@@ -652,48 +544,48 @@ export const Component = () => {
       {/* CSS for exact styling and animations */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap');
-
+        
         @keyframes grainMove {
-          0% {
+          0% { 
             background-position: 0px 0px, 0px 0px, 0px 0px;
           }
-          10% {
+          10% { 
             background-position: -5px -10px, 10px -15px, -10px 5px;
           }
-          20% {
+          20% { 
             background-position: -10px 5px, -5px 10px, 15px -10px;
           }
-          30% {
+          30% { 
             background-position: 15px -5px, -10px 5px, -5px 15px;
           }
-          40% {
+          40% { 
             background-position: 5px 10px, 15px -10px, 10px -5px;
           }
-          50% {
+          50% { 
             background-position: -15px 10px, 5px 15px, -10px -15px;
           }
-          60% {
+          60% { 
             background-position: 10px -15px, -15px -5px, 15px 10px;
           }
-          70% {
+          70% { 
             background-position: -5px 15px, 10px -10px, -15px 5px;
           }
-          80% {
+          80% { 
             background-position: 15px 5px, -5px -15px, 5px -10px;
           }
-          90% {
+          90% { 
             background-position: -10px -5px, 15px 10px, 10px 15px;
           }
-          100% {
+          100% { 
             background-position: 0px 0px, 0px 0px, 0px 0px;
           }
         }
-
+        
         a:hover {
           opacity: 1 !important;
           transition: opacity 0.2s ease;
         }
-
+        
         * {
           box-sizing: border-box;
         }
