@@ -1,0 +1,57 @@
+3:22:59 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+3:22:58 PM: Netlify Build                                                 
+3:22:58 PM: ────────────────────────────────────────────────────────────────
+3:22:58 PM: ​
+3:22:58 PM: ❯ Version
+3:22:58 PM:   @netlify/build 35.1.6
+3:22:58 PM: ​
+3:22:58 PM: ❯ Flags
+3:22:58 PM:   accountId: 688adc2301e5d5e950a9e88a
+3:22:58 PM:   baseRelDir: true
+3:22:58 PM:   buildId: 68c1c1f4a811e7a467c97c0f
+3:22:58 PM:   deployId: 68c1c1f4a811e7a467c97c11
+3:22:58 PM: ​
+3:22:58 PM: ❯ Current directory
+3:22:58 PM:   /opt/build/repo/client
+3:22:58 PM: ​
+3:22:58 PM: ❯ Config file
+3:22:58 PM:   /opt/build/repo/netlify.toml
+3:22:58 PM: ​
+3:22:58 PM: ❯ Context
+3:22:58 PM:   production
+3:22:58 PM: ​
+3:22:58 PM: build.command from netlify.toml                               
+3:22:58 PM: ────────────────────────────────────────────────────────────────
+3:22:58 PM: ​
+3:22:58 PM: $ npm run build
+3:22:58 PM: > rest-express@1.0.0 build
+3:22:58 PM: > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+3:22:58 PM: sh: 1: vite: not found
+3:22:58 PM: ​
+3:22:58 PM: "build.command" failed                                        
+3:22:58 PM: ────────────────────────────────────────────────────────────────
+3:22:58 PM: ​
+3:22:58 PM:   Error message
+3:22:58 PM:   Command failed with exit code 127: npm run build (https://ntl.fyi/exit-code-127)
+3:22:58 PM: ​
+3:22:58 PM:   Error location
+3:22:58 PM:   In build.command from netlify.toml:
+3:22:58 PM:   npm run build
+3:22:58 PM: ​
+3:22:58 PM:   Resolved config
+3:22:58 PM:   build:
+3:22:58 PM:     base: /opt/build/repo/client
+3:22:58 PM:     command: npm run build
+3:22:58 PM:     commandOrigin: config
+3:22:58 PM:     environment:
+3:22:58 PM:       - NODE_VERSION
+3:22:58 PM:     publish: /opt/build/repo/client/dist
+3:22:58 PM:     publishOrigin: config
+3:22:58 PM:   redirects:
+3:22:59 PM:     - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+3:22:59 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+3:22:59 PM: Failing build: Failed to build site
+3:22:59 PM: Finished processing build request in 9.126s
