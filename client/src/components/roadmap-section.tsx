@@ -14,7 +14,7 @@ export function RoadmapSection() {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
             // Animate progress bar
-            setTimeout(() => setProgressValue(35), 500);
+            setTimeout(() => setProgressValue(20), 500);
           }
         });
       },
@@ -40,7 +40,7 @@ export function RoadmapSection() {
           <div className="bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 border border-emerald-500/20 rounded-xl p-4 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
             <div className="relative z-10 flex items-center justify-between mb-3">
-              <span className="text-emerald-400 font-mono text-xs tracking-wider">v1.0.0-alpha</span>
+              <span className="text-emerald-400 font-mono text-xs tracking-wider">Whitepaper v1.0</span>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                 <span className="text-emerald-400 text-xs">ACTIVE</span>
@@ -75,7 +75,7 @@ export function RoadmapSection() {
           
           <div className="bg-gray-900/50 border border-gray-700 rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-gray-400 text-sm font-mono">Hash: 0x7a3f...8e2d</span>
+              <span className="text-gray-400 text-sm font-mono">Hash: HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump</span>
               <span className="text-emerald-400 text-xs">VERIFIED</span>
             </div>
             <div className="grid grid-cols-2 gap-4 text-sm">
@@ -111,19 +111,19 @@ export function RoadmapSection() {
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-blue-400 font-mono text-sm">Patent Portfolio</span>
-                  <span className="text-green-400 text-xs">FILING</span>
+                  <span className="text-yellow-400 text-xs">EM PROCESSO</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-xs">
                   <div className="text-center">
-                    <div className="text-white font-mono">5</div>
-                    <div className="text-gray-400">Patents</div>
+                    <div className="text-white font-mono">Em Processo</div>
+                    <div className="text-gray-400">Patentes</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-white font-mono">12</div>
-                    <div className="text-gray-400">Countries</div>
+                    <div className="text-white font-mono">Global</div>
+                    <div className="text-gray-400">Países Alvo</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-white font-mono">18M</div>
+                    <div className="text-white font-mono">Confidencial</div>
                     <div className="text-gray-400">IP Value</div>
                   </div>
                 </div>
@@ -132,9 +132,9 @@ export function RoadmapSection() {
               <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-500/30">
                 <div className="flex items-center mb-2">
                   <Zap className="w-4 h-4 text-yellow-400 mr-2" />
-                  <span className="text-yellow-400 font-mono">dApp Launch</span>
+                  <span className="text-yellow-400 font-mono">Marco Principal</span>
                 </div>
-                <p className="text-gray-300 text-sm">Staking platform with automated rewards distribution</p>
+                <p className="text-gray-300 text-sm">Apresentação na COP 30 - Demonstração tecnológica global</p>
               </div>
             </div>
           </div>
@@ -159,8 +159,9 @@ export function RoadmapSection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="text-center mb-2">
-                  <div className="text-2xl font-mono text-orange-400">10K</div>
-                  <div className="text-gray-400 text-xs">Units/Year</div>
+                  <div className="text-lg font-mono text-orange-400">10.000+</div>
+                  <div className="text-gray-400 text-xs">Meta de Produção</div>
+                  <div className="text-gray-400 text-xs">Unidades/Ano</div>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
                   <div className="bg-gradient-to-r from-orange-400 to-red-400 h-2 rounded-full w-0 animate-pulse"></div>
@@ -169,11 +170,12 @@ export function RoadmapSection() {
               
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="text-center mb-2">
-                  <div className="text-2xl font-mono text-emerald-400">4.2M</div>
-                  <div className="text-gray-400 text-xs">Revenue Goal</div>
+                  <div className="text-lg font-mono text-emerald-400">6.75M</div>
+                  <div className="text-gray-400 text-xs">Potencial Staking</div>
+                  <div className="text-gray-400 text-xs">USD/Ano</div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <span className="text-emerald-400 text-xs font-mono">USD</span>
+                  <span className="text-emerald-400 text-xs font-mono">RECOMPENSA</span>
                 </div>
               </div>
             </div>
@@ -204,21 +206,21 @@ export function RoadmapSection() {
             <div className="space-y-3">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-emerald-400 font-mono">Revenue Share</span>
-                  <span className="text-emerald-400 text-xs">ACTIVE</span>
+                  <span className="text-emerald-400 font-mono">Alocação de Lucro</span>
+                  <span className="text-yellow-400 text-xs">Q3 2026</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-xs text-center">
                   <div>
-                    <div className="text-white font-mono">25%</div>
-                    <div className="text-gray-400">Holders</div>
+                    <div className="text-white font-mono">30%</div>
+                    <div className="text-gray-400">Staking</div>
                   </div>
                   <div>
-                    <div className="text-white font-mono">15%</div>
+                    <div className="text-white font-mono">10%</div>
                     <div className="text-gray-400">Burn</div>
                   </div>
                   <div>
                     <div className="text-white font-mono">60%</div>
-                    <div className="text-gray-400">Operations</div>
+                    <div className="text-gray-400">Reinvestimento</div>
                   </div>
                 </div>
               </div>
@@ -262,12 +264,11 @@ export function RoadmapSection() {
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center mb-2">
                   <div className="w-3 h-3 bg-blue-400 rounded-full mr-2"></div>
-                  <span className="text-blue-400 font-mono">Global Expansion</span>
+                  <span className="text-blue-400 font-mono">Mercados-Alvo</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2 text-xs text-center mt-2">
-                  <div className="text-blue-300">Americas</div>
-                  <div className="text-green-300">Europe</div>
-                  <div className="text-yellow-300">Asia-Pacific</div>
+                <div className="grid grid-cols-2 gap-2 text-xs text-center mt-2">
+                  <div className="text-blue-300">China • Índia</div>
+                  <div className="text-green-300">EUA • Alemanha</div>
                 </div>
               </div>
               
@@ -365,7 +366,7 @@ export function RoadmapSection() {
               <div className="w-2 h-2 bg-emerald-400 rounded-full mr-3 animate-pulse"></div>
               System Metrics
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
               <div className="text-center">
                 <div className="text-2xl font-mono text-cyan-400">98.7%</div>
                 <div className="text-gray-400 text-sm">Efficiency</div>
@@ -375,12 +376,20 @@ export function RoadmapSection() {
                 <div className="text-gray-400 text-sm">Uptime</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-mono text-purple-400">5.2M</div>
-                <div className="text-gray-400 text-sm">Tokens Staked</div>
+                <div className="text-2xl font-mono text-purple-400">70</div>
+                <div className="text-gray-400 text-sm">Holders Atuais</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-mono text-yellow-400">47</div>
-                <div className="text-gray-400 text-sm">DAO Members</div>
+                <div className="text-2xl font-mono text-orange-400">US$ 0</div>
+                <div className="text-gray-400 text-sm">TVL</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-mono text-red-400">0</div>
+                <div className="text-gray-400 text-sm">Tokens Queimados</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-mono text-yellow-400">Dinâmico</div>
+                <div className="text-gray-400 text-sm">Staking APY</div>
               </div>
             </div>
           </div>
