@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Timeline, type TimelineItem } from '@/components/ui/timeline';
 import { Briefcase, Award, MapPin, Calendar, GraduationCap, Zap, Shield, Cpu, Rocket, Globe } from 'lucide-react';
@@ -72,7 +71,7 @@ export function RoadmapSection() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gray-900/50 border border-gray-700 rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <span className="text-gray-400 text-sm font-mono">Hash: HrSUCXgwQNVr4fhKbZxokLEdPskVJ2swwGXZkM4Hpump</span>
@@ -106,7 +105,7 @@ export function RoadmapSection() {
               <span className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs font-mono">COP 30</span>
             </div>
             <h4 className="text-lg font-semibold text-white mb-3">International Showcase</h4>
-            
+
             <div className="space-y-3">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center justify-between mb-2">
@@ -128,7 +127,7 @@ export function RoadmapSection() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-500/30">
                 <div className="flex items-center mb-2">
                   <Zap className="w-4 h-4 text-yellow-400 mr-2" />
@@ -155,31 +154,31 @@ export function RoadmapSection() {
               <h4 className="text-lg font-semibold text-white">Smart Factory</h4>
               <span className="bg-orange-500/20 text-orange-300 px-2 py-1 rounded-full text-xs font-mono">MANAUS</span>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="text-center mb-2">
                   <div className="text-lg font-mono text-orange-400 font-bold">10.000+</div>
-                  <div className="text-white text-xs font-semibold">Meta de Produção</div>
-                  <div className="text-gray-300 text-xs">Unidades/Ano</div>
+                  <div className="text-white text-xs font-bold">Meta de Produção</div>
+                  <div className="text-gray-200 text-xs font-semibold">Unidades/Ano</div>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
                   <div className="bg-gradient-to-r from-orange-400 to-red-400 h-2 rounded-full w-0 animate-pulse"></div>
                 </div>
               </div>
-              
+
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="text-center mb-2">
                   <div className="text-lg font-mono text-emerald-400 font-bold">6.75M</div>
-                  <div className="text-white text-xs font-semibold">Potencial Staking</div>
-                  <div className="text-gray-300 text-xs">USD/Ano</div>
+                  <div className="text-white text-xs font-bold">Potencial Staking</div>
+                  <div className="text-gray-200 text-xs font-semibold">USD/Ano</div>
                 </div>
                 <div className="flex items-center justify-center">
                   <span className="text-emerald-400 text-xs font-mono">RECOMPENSA</span>
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg p-3 border border-cyan-500/30">
               <div className="flex items-center mb-2">
                 <div className="w-3 h-3 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
@@ -202,7 +201,7 @@ export function RoadmapSection() {
         <div className="space-y-4">
           <div className="bg-gradient-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 border border-emerald-500/20 rounded-xl p-4">
             <h4 className="text-lg font-semibold text-white mb-3">Tokenomics Activation</h4>
-            
+
             <div className="space-y-3">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center justify-between mb-2">
@@ -224,7 +223,7 @@ export function RoadmapSection() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-r from-gold-500/20 to-yellow-500/20 rounded-lg p-3 border border-yellow-500/30">
                 <div className="flex items-center justify-between">
                   <span className="text-yellow-400 font-mono text-sm">Deflationary Mechanism</span>
@@ -251,7 +250,7 @@ export function RoadmapSection() {
         <div className="space-y-4">
           <div className="bg-gradient-to-r from-purple-500/10 via-violet-500/10 to-indigo-500/10 border border-purple-500/20 rounded-xl p-4">
             <h4 className="text-lg font-semibold text-white mb-3">Decentralized Future</h4>
-            
+
             <div className="grid grid-cols-1 gap-3">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center mb-2">
@@ -260,7 +259,7 @@ export function RoadmapSection() {
                 </div>
                 <p className="text-white text-sm font-medium">Community-driven decisions via on-chain voting</p>
               </div>
-              
+
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="flex items-center mb-2">
                   <div className="w-3 h-3 bg-blue-400 rounded-full mr-2"></div>
@@ -271,7 +270,7 @@ export function RoadmapSection() {
                   <div className="text-green-300 font-semibold">EUA • Alemanha</div>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-r from-cyan-500/20 to-teal-500/20 rounded-lg p-3 border border-cyan-500/30">
                 <div className="flex items-center mb-1">
                   <Rocket className="w-4 h-4 text-cyan-400 mr-2" />
@@ -299,7 +298,7 @@ export function RoadmapSection() {
           animation: 'grid-move 20s linear infinite'
         }}></div>
       </div>
-      
+
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
@@ -314,7 +313,7 @@ export function RoadmapSection() {
           />
         ))}
       </div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 fade-in">
           <div className="inline-block bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full px-6 py-2 mb-4 border border-cyan-500/30">
@@ -326,7 +325,7 @@ export function RoadmapSection() {
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8" data-testid="roadmap-subtitle">
             Nossa jornada tecnológica rumo à descentralização energética global
           </p>
-          
+
           {/* Progress Indicator */}
           <div className="max-w-md mx-auto mb-8">
             <div className="flex items-center justify-between mb-2">
@@ -347,7 +346,7 @@ export function RoadmapSection() {
             </div>
           </div>
         </div>
-        
+
         <div className="max-w-5xl mx-auto fade-in">
           <Timeline 
             items={roadmapItems}
@@ -358,7 +357,7 @@ export function RoadmapSection() {
             data-testid="roadmap-timeline"
           />
         </div>
-        
+
         {/* Technical Metrics Panel */}
         <div className="mt-16 fade-in">
           <div className="bg-gradient-to-r from-gray-900/80 to-black/80 rounded-2xl border border-gray-700/50 p-6 backdrop-blur-sm">
@@ -395,24 +394,24 @@ export function RoadmapSection() {
           </div>
         </div>
       </div>
-      
+
       <style>{`
         @keyframes grid-move {
           0% { transform: translate(0, 0); }
           100% { transform: translate(50px, 50px); }
         }
-        
+
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
           50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
         }
-        
+
         .fade-in {
           opacity: 0;
           transform: translateY(20px);
           transition: all 0.8s ease-out;
         }
-        
+
         .fade-in.visible {
           opacity: 1;
           transform: translateY(0);
