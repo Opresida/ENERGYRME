@@ -1,8 +1,9 @@
 
 [build]
-  base = "client"
-  publish = "dist"
-  command = "npm install && npm run build"
+  # O comando agora entra na pasta 'client' primeiro.
+  command = "cd client && npm install && npm run build"
+  # O diretório de publicação é relativo à pasta 'client'.
+  publish = "client/dist"
 
 [[redirects]]
   from = "/*"
