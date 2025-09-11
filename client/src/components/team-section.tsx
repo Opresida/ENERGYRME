@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Linkedin, Github, Mail, Users, Award, Briefcase, GraduationCap, Globe, ChevronRight, Zap } from 'lucide-react';
+import { Linkedin, Github, Mail, Users, Award, Briefcase, GraduationCap, Globe, ChevronRight, Zap, Instagram } from 'lucide-react';
 
 export function TeamSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -23,12 +23,29 @@ export function TeamSection() {
       },
       color: "from-emerald-400/20 to-cyan-400/20",
       borderColor: "border-emerald-400/30"
+    },
+    {
+      id: 2,
+      name: "César Limyah",
+      role: "Chefe de Desenvolvimento e Tokenização",
+      subtitle: "Dev Solidity & Blockchain Architect",
+      image: "https://i.imgur.com/CbDk1tD.jpeg",
+      bio: "Um líder em tecnologia, fintechs e inovação digital. Com mais de 10 anos de experiência em tecnologia, publicidade e negócios digitais, fundador da Vallion Holding, K2Pay e KaisarBank. Especialista em transformar ideias em produtos de alto impacto no ecossistema blockchain.",
+      expertise: ["Blockchain & DeFi", "Desenvolvimento Solidity", "Sistemas Bancários", "Fintechs & Startups"],
+      achievements: ["Founder KaisarBank", "CEO Valleycorn", "10+ Anos Tech", "Mentor Criptoeconomia"],
+      social: {
+        linkedin: "#",
+        email: "cesar.limyah@rmenergytoken.com",
+        instagram: "https://www.instagram.com/csar.limyah?igsh=MW83bjNrZTFuMXFlNQ=="
+      },
+      color: "from-blue-400/20 to-purple-400/20",
+      borderColor: "border-blue-400/30"
     }
   ];
 
   const stats = [
-    { value: "20+", label: "Anos Experiência", icon: <Award className="w-5 h-5" />, color: "text-emerald-400" },
-    { value: "1", label: "Co-Founder", icon: <Users className="w-5 h-5" />, color: "text-cyan-400" },
+    { value: "30+", label: "Anos Experiência", icon: <Award className="w-5 h-5" />, color: "text-emerald-400" },
+    { value: "2", label: "Co-Founders", icon: <Users className="w-5 h-5" />, color: "text-cyan-400" },
     { value: "100%", label: "Dedicação", icon: <Zap className="w-5 h-5" />, color: "text-purple-400" },
     { value: "Global", label: "Visão", icon: <Globe className="w-5 h-5" />, color: "text-blue-400" }
   ];
@@ -151,8 +168,8 @@ export function TeamSection() {
           </div>
         </div>
 
-        {/* Team Member Card */}
-        <div className="max-w-6xl mx-auto fade-in">
+        {/* Team Members Grid */}
+        <div className="max-w-7xl mx-auto fade-in space-y-12">
           {teamMembers.map((member, index) => (
             <div
               key={member.id}
@@ -196,6 +213,14 @@ export function TeamSection() {
                       >
                         <Mail className="w-5 h-5 text-emerald-400" />
                       </a>
+                      {member.social.instagram && (
+                        <a 
+                          href={member.social.instagram}
+                          className="bg-purple-400/20 hover:bg-purple-400/30 border border-purple-400/50 rounded-full p-3 transition-all duration-300 hover:scale-110"
+                        >
+                          <Instagram className="w-5 h-5 text-purple-400" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
