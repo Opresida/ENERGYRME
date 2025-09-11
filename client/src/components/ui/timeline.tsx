@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -188,7 +187,7 @@ export function Timeline({
 
             {/* Title and Inline Timestamp */}
             <div className="flex items-start justify-between gap-2">
-              <h3 className="font-medium leading-tight">{item.title}</h3>
+              <h3 className="timeline-title text-lg font-semibold mb-2 text-white">{item.title}</h3>
               {showTimestamps &&
                 timestampPosition === "inline" &&
                 item.timestamp && (

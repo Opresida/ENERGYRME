@@ -353,7 +353,7 @@ export function RoadmapSection() {
             variant="spacious"
             showTimestamps={true}
             timestampPosition="inline"
-            className="w-full"
+            className="w-full [&_.timeline-title]:text-white [&_.timeline-title]:font-bold"
             data-testid="roadmap-timeline"
           />
         </div>
