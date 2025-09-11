@@ -1,6 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
+import { TelegramButton } from './telegram-button';
 
 interface Message {
   id: string;
@@ -77,6 +78,9 @@ export function LiveChat() {
 
   return (
     <>
+      {/* Telegram Button */}
+      <TelegramButton />
+      
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
