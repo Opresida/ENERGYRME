@@ -115,15 +115,15 @@ export function RoadmapSection() {
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-xs">
                   <div className="text-center">
-                    <div className="text-white font-mono">Em Processo</div>
+                    <div className="text-white font-mono font-bold">Em Processo</div>
                     <div className="text-gray-400">Patentes</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-white font-mono">Global</div>
+                    <div className="text-white font-mono font-bold">Global</div>
                     <div className="text-gray-400">Países Alvo</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-white font-mono">Confidencial</div>
+                    <div className="text-white font-mono font-bold">Confidencial</div>
                     <div className="text-gray-400">IP Value</div>
                   </div>
                 </div>
@@ -159,9 +159,9 @@ export function RoadmapSection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="text-center mb-2">
-                  <div className="text-lg font-mono text-orange-400">10.000+</div>
-                  <div className="text-gray-400 text-xs">Meta de Produção</div>
-                  <div className="text-gray-400 text-xs">Unidades/Ano</div>
+                  <div className="text-lg font-mono text-orange-400 font-bold">10.000+</div>
+                  <div className="text-white text-xs font-semibold">Meta de Produção</div>
+                  <div className="text-gray-300 text-xs">Unidades/Ano</div>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
                   <div className="bg-gradient-to-r from-orange-400 to-red-400 h-2 rounded-full w-0 animate-pulse"></div>
@@ -170,9 +170,9 @@ export function RoadmapSection() {
               
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
                 <div className="text-center mb-2">
-                  <div className="text-lg font-mono text-emerald-400">6.75M</div>
-                  <div className="text-gray-400 text-xs">Potencial Staking</div>
-                  <div className="text-gray-400 text-xs">USD/Ano</div>
+                  <div className="text-lg font-mono text-emerald-400 font-bold">6.75M</div>
+                  <div className="text-white text-xs font-semibold">Potencial Staking</div>
+                  <div className="text-gray-300 text-xs">USD/Ano</div>
                 </div>
                 <div className="flex items-center justify-center">
                   <span className="text-emerald-400 text-xs font-mono">RECOMPENSA</span>
@@ -211,16 +211,16 @@ export function RoadmapSection() {
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-xs text-center">
                   <div>
-                    <div className="text-white font-mono">30%</div>
-                    <div className="text-gray-400">Staking</div>
+                    <div className="text-white font-mono font-bold">30%</div>
+                    <div className="text-gray-300 font-semibold">Staking</div>
                   </div>
                   <div>
-                    <div className="text-white font-mono">10%</div>
-                    <div className="text-gray-400">Burn</div>
+                    <div className="text-white font-mono font-bold">10%</div>
+                    <div className="text-gray-300 font-semibold">Burn</div>
                   </div>
                   <div>
-                    <div className="text-white font-mono">60%</div>
-                    <div className="text-gray-400">Reinvestimento</div>
+                    <div className="text-white font-mono font-bold">60%</div>
+                    <div className="text-gray-300 font-semibold">Reinvestimento</div>
                   </div>
                 </div>
               </div>
@@ -258,7 +258,7 @@ export function RoadmapSection() {
                   <div className="w-3 h-3 bg-purple-400 rounded-full mr-2"></div>
                   <span className="text-purple-400 font-mono">DAO Governance</span>
                 </div>
-                <p className="text-gray-300 text-sm">Community-driven decisions via on-chain voting</p>
+                <p className="text-white text-sm font-medium">Community-driven decisions via on-chain voting</p>
               </div>
               
               <div className="bg-black/40 rounded-lg p-3 border border-gray-700/30">
@@ -267,8 +267,8 @@ export function RoadmapSection() {
                   <span className="text-blue-400 font-mono">Mercados-Alvo</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs text-center mt-2">
-                  <div className="text-blue-300">China • Índia</div>
-                  <div className="text-green-300">EUA • Alemanha</div>
+                  <div className="text-blue-300 font-semibold">China • Índia</div>
+                  <div className="text-green-300 font-semibold">EUA • Alemanha</div>
                 </div>
               </div>
               
