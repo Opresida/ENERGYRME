@@ -199,7 +199,7 @@ export function Timeline({
 
             {/* Description */}
             {item.description && (
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm text-white mt-1">
                 {item.description}
               </p>
             )}
