@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { ChevronDown, HelpCircle, Zap, Shield, Globe, DollarSign } from 'lucide-react';
 
@@ -135,7 +134,7 @@ export function FAQSection() {
                   }`} 
                 />
               </button>
-              
+
               <div className={`transition-all duration-300 overflow-hidden ${
                 openFAQ === faq.id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
               }`}>
@@ -152,7 +151,7 @@ export function FAQSection() {
         </div>
       </div>
 
-      
+
     </section>
   );
 }
